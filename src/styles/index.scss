@@ -1,0 +1,67 @@
+nav,
+header,
+h1,
+h2,
+ul,
+li,
+aside,
+section,
+a,
+p,
+body {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both
+}
+
+section {
+  display: block;
+}
+
+body {
+  font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #666;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -ms-transition: all .15s ease-in-out;
+  -o-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
+}
+
+h1 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  color: #222;
+  font-weight: bold
+}
+
+h2 {
+  color: #bbb
+}
