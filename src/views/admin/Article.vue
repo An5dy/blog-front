@@ -89,10 +89,18 @@ export default {
       try {
         await this.getArticles({ page: page });
         this.loading = false;
-      } catch (err) {
+      } catch (error) {
         this.loading = false;
-        Message.info(err.response.data.message);
+        Message.info(error.response.data.message);
       }
+    },
+    editArticle(row) {
+      this.$router.push({
+        name: "article-edit",
+        params: {
+          id: row.id
+        }
+      });
     }
   },
   computed: {

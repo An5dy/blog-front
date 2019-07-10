@@ -1,11 +1,10 @@
 import ArticleAPI from "@/api/article";
-import { Message } from "element-ui";
 
 const state = {
   list: [],
   meta: {},
   categories: [],
-  loading: false
+  article: {}
 };
 
 const mutations = {
@@ -18,8 +17,8 @@ const mutations = {
   SET_CATEGORIES: (state, action) => {
     state.categories = action;
   },
-  SET_LOADING: (state, action) => {
-    state.loading = action;
+  SET_ARTICLE: (state, action) => {
+    state.article = action;
   }
 };
 
@@ -31,18 +30,23 @@ const actions = {
     commit("SET_META", meta);
     return response;
   },
-  async storeArticle({ commit, state }, payload) {
-    if (state.loading) return;
-    commit("SET_LOADING", true);
-    try {
-      await ArticleAPI.store(payload);
-      commit("SET_LOADING", false);
-      return true;
-    } catch (error) {
-      commit("SET_LOADING", false);
-      Message.info(error.response.data.message);
-      return false;
-    }
+  async storeArticle({ commit }, payload) {
+    const response = await ArticleAPI.store(payload);
+    commit("SET_ARTICLE", {});
+    return response;
+  },
+  async getArticle({ commit }, payload) {
+    const response = await ArticleAPI.show(payload);
+    const { category, main, title } = response.data;
+    commit("SET_ARTICLE", {
+      category_id: category.id,
+      main: main,
+      title: title
+    });
+    return response;
+  },
+  clearArtilce({ commit }) {
+    commit("SET_ARTICLE", {});
   },
   async getCategories({ commit }) {
     const response = await ArticleAPI.categories();

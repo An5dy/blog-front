@@ -8,6 +8,10 @@ const store = data => {
   return axios.post("articles", data);
 };
 
+const show = id => {
+  return axios.get(`articles/${id}`);
+};
+
 const categories = () => {
   return axios.get("categories");
 };
@@ -15,5 +19,6 @@ const categories = () => {
 export default {
   index,
   store,
-  categories
+  categories,
+  show
 };

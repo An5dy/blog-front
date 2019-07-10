@@ -37,23 +37,23 @@
 </template>
 
 <script>
+const validateAccount = (rule, value, callback) => {
+  if (!value) {
+    callback(new Error("用户名不能为空。"));
+  } else {
+    callback();
+  }
+};
+const validatePassword = (rule, value, callback) => {
+  if (value.length < 6) {
+    callback(new Error("密码不能小于6位。"));
+  } else {
+    callback();
+  }
+};
 export default {
   name: "Login",
   data() {
-    const validateAccount = (rule, value, callback) => {
-      if (!value) {
-        callback(new Error("用户名不能为空。"));
-      } else {
-        callback();
-      }
-    };
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error("密码不能小于6位。"));
-      } else {
-        callback();
-      }
-    };
     return {
       loading: false,
       loginForm: {
@@ -79,16 +79,12 @@ export default {
     };
   },
   methods: {
-    handleLogin() {
+    async handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          let data = {
-            account: this.loginForm.account,
-            password: this.loginForm.password
-          };
           this.$store
-            .dispatch("login/login", data)
+            .dispatch("login/login", this.loginForm)
             .then(() => {
               this.$router.push("/admin");
             })

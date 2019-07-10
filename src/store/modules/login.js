@@ -13,11 +13,7 @@ const mutations = {
 
 const actions = {
   async login({ commit }, payload) {
-    const { account, password } = payload;
-    const response = await LoginAPI.login({
-      account: account,
-      password: password
-    });
+    const response = await LoginAPI.login(payload);
     const { access_token } = response.data;
     commit("SET_TOKEN", access_token);
     Token.set(access_token);

@@ -50,34 +50,47 @@ export default {
   data() {
     return {
       toolbars: mavonEditorConfig.toolbars,
-      article: {
-        category_id: null,
-        title: null,
-        main: ""
-      }
+      loading: false
     };
   },
   async beforeRouteEnter(to, from, next) {
-    try {
-      await store.dispatch("article/getCategories");
-      next();
-    } catch (e) {
-      Message.info(e.response.data.message);
+    const id = to.params.id;
+    let request = [store.dispatch("article/getCategories")];
+    if (id) {
+      request.push(store.dispatch("article/getArticle", id));
+    }
+    await Promise.all([request])
+      .then(() => {
+        next();
+      })
+      .catch(error => {
+        Message.info(error.response.data.message);
+      });
+  },
+  watch: {
+    $route() {
+      this.$store.dispatch("article/clearArtilce");
     }
   },
   methods: {
     ...mapActions(["storeArticle"]),
     async handleAdd() {
-      const response = await this.storeArticle(this.article);
-      if (response) {
+      if (this.loading) return;
+      this.loading = true;
+      try {
+        await this.storeArticle(this.article);
+        this.loading = false;
         this.$router.push("/admin/articles");
+      } catch (error) {
+        this.loading = false;
+        Message.info(error.response.data.message);
       }
     }
   },
   computed: {
     ...mapState({
       categories: state => state.categories,
-      loading: state => state.loading
+      article: state => state.article
     })
   }
 };

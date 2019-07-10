@@ -33,7 +33,7 @@ const router = new Router({
       children: [
         {
           path: "/admin/articles",
-          name: "article-list",
+          name: "article-index",
           component: () => import("./views/admin/Article.vue"),
           meta: {
             title: "文章列表"
@@ -46,6 +46,14 @@ const router = new Router({
           meta: {
             title: "新增文章"
           }
+        },
+        {
+          path: "/admin/articles/:id/edit",
+          name: "article-edit",
+          component: () => import("./views/admin/ArticleCreate.vue"),
+          meta: {
+            title: "编辑文章"
+          }
         }
       ]
     }
@@ -53,7 +61,7 @@ const router = new Router({
 });
 
 // 需要用户认证路由
-const guard = ["/admin", "/admin/articles", "/admin/articles/create"];
+const guard = ["admin", "article-index", "article-create", "article-edit"];
 
 router.beforeEach((to, from, next) => {
   if (Token.get()) {
@@ -63,7 +71,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    if (guard.indexOf(to.path) !== -1) {
+    if (guard.indexOf(to.name) !== -1) {
       next({ path: "/admin/login" });
     } else {
       next();
