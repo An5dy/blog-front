@@ -37,16 +37,14 @@ const actions = {
   },
   async getArticle({ commit }, payload) {
     const response = await ArticleAPI.show(payload);
-    const { category, main, title } = response.data;
-    commit("SET_ARTICLE", {
-      category_id: category.id,
-      main: main,
-      title: title
-    });
+    commit("SET_ARTICLE", {});
     return response;
   },
-  clearArtilce({ commit }) {
+  async updateArticle({ commit }, payload) {
+    const { id, data } = payload;
+    const response = await ArticleAPI.update(data, id);
     commit("SET_ARTICLE", {});
+    return response;
   },
   async getCategories({ commit }) {
     const response = await ArticleAPI.categories();

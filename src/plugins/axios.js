@@ -73,7 +73,7 @@ export default {
   },
   put(url, data) {
     return new Promise((resolve, reject) => {
-      data["_method"] = "PUT";
+      data["_method"] = "PATCH";
       service({
         url: url,
         method: "post",

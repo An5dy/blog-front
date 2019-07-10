@@ -12,6 +12,10 @@ const show = id => {
   return axios.get(`articles/${id}`);
 };
 
+const update = (data, id) => {
+  return axios.put(`articles/${id}`, data);
+};
+
 const categories = () => {
   return axios.get("categories");
 };
@@ -20,5 +24,6 @@ export default {
   index,
   store,
   categories,
-  show
+  show,
+  update
 };

@@ -1,11 +1,11 @@
 <template>
   <el-form>
     <el-form-item label="标题">
-      <el-input v-model="article.title" size="small" style="width: 450px" />
+      <el-input v-model="form.title" size="small" style="width: 450px" />
     </el-form-item>
     <el-form-item label="分类">
       <el-select
-        v-model="article.category_id"
+        v-model="form.category_id"
         size="small"
         placeholder="请选择分类"
       >
@@ -18,7 +18,7 @@
       </el-select>
     </el-form-item>
     <el-form-item label="正文">
-      <mavon-editor :toolbars="toolbars" v-model="article.main"></mavon-editor>
+      <mavon-editor :toolbars="toolbars" v-model="form.main"></mavon-editor>
     </el-form-item>
     <el-form-item>
       <el-button
@@ -26,8 +26,18 @@
         size="medium"
         type="primary"
         :loading="loading"
-        @click="handleAdd"
+        @click="handleCreate"
+        v-if="form.id === null"
         >确认发布</el-button
+      >
+      <el-button
+        style="float:right;"
+        size="medium"
+        type="primary"
+        :loading="loading"
+        @click="handleEdit"
+        v-else
+        >确认编辑</el-button
       >
     </el-form-item>
   </el-form>
@@ -50,7 +60,13 @@ export default {
   data() {
     return {
       toolbars: mavonEditorConfig.toolbars,
-      loading: false
+      loading: false,
+      form: {
+        id: null,
+        category_id: null,
+        main: "",
+        title: ""
+      }
     };
   },
   async beforeRouteEnter(to, from, next) {
@@ -59,22 +75,21 @@ export default {
     if (id) {
       request.push(store.dispatch("article/getArticle", id));
     }
-    await Promise.all([request])
-      .then(() => {
-        next();
+    await Promise.all(request)
+      .then(response => {
+        next(vm => {
+          if (id) {
+            vm._setForm(response[1].data);
+          }
+        });
       })
       .catch(error => {
         Message.info(error.response.data.message);
       });
   },
-  watch: {
-    $route() {
-      this.$store.dispatch("article/clearArtilce");
-    }
-  },
   methods: {
-    ...mapActions(["storeArticle"]),
-    async handleAdd() {
+    ...mapActions(["storeArticle", "updateArticle"]),
+    async handleCreate() {
       if (this.loading) return;
       this.loading = true;
       try {
@@ -85,12 +100,45 @@ export default {
         this.loading = false;
         Message.info(error.response.data.message);
       }
+    },
+    async handleEdit() {
+      if (this.loading) return;
+      this.loading = true;
+      const payload = {
+        id: this.$route.params.id,
+        data: this.form
+      };
+      try {
+        await this.updateArticle(payload);
+        this.loading = false;
+        this.$router.push("/admin/articles");
+      } catch (error) {
+        this.loading = false;
+        Message.info(error.response.data.message);
+      }
+    },
+    _setForm(article) {
+      this.form = {
+        id: article.id,
+        category_id: article.category.id,
+        main: article.main,
+        title: article.title
+      };
+    }
+  },
+  watch: {
+    $route() {
+      this.form = {
+        id: null,
+        category_id: null,
+        main: "",
+        title: ""
+      };
     }
   },
   computed: {
     ...mapState({
-      categories: state => state.categories,
-      article: state => state.article
+      categories: state => state.categories
     })
   }
 };
