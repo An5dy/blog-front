@@ -3,94 +3,27 @@
     <blog-nav></blog-nav>
     <blog-profile></blog-profile>
     <section class="home">
-      <ul class="post-list">
-        <li>
-          <aside class="dates">Jun 11</aside>
-          <a href="/hexo-theme-dxx/2017/06/11/hello-world/">
-            Hello World
-            <h2>
-              <p>Hello World</p>
-            </h2>
-          </a>
-        </li>
-        <li>
-          <aside class="dates">Dec 25</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/excerpts/"
-            >Excerpts
-            <h2>
-              <p>
-                The following contents should be invisible in home/archive page.
-              </p>
-            </h2></a
-          >
-        </li>
-        <li>
-          <aside class="dates">Dec 24</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/日本語テスト/"
-            >日本語テスト
-            <h2>
-              <p>This is a Japanese test post.</p>
-            </h2></a
-          >
-        </li>
-        <li>
-          <aside class="dates">Dec 24</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/中文測試/"
-            >中文測試
-            <h2>
-              <p>中文测试</p>
-            </h2></a
-          >
-        </li>
-        <li>
-          <aside class="dates">Dec 24</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/中文測試/"
-            >中文測試
-            <h2>
-              <p>中文测试</p>
-            </h2></a
-          >
-        </li>
-        <li>
-          <aside class="dates">Dec 24</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/中文測試/"
-            >中文測試
-            <h2>
-              <p>中文测试</p>
-            </h2></a
-          >
-        </li>
-        <li>
-          <aside class="dates">Dec 24</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/中文測試/"
-            >中文測試
-            <h2>
-              <p>中文测试</p>
-            </h2></a
-          >
-        </li>
-        <li>
-          <aside class="dates">Dec 24</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/中文測試/"
-            >中文測試
-            <h2>
-              <p>中文测试</p>
-            </h2></a
-          >
-        </li>
-        <li>
-          <aside class="dates">Dec 24</aside>
-          <a href="/hexo-theme-dxx/2013/12/24/中文測試/"
-            >中文測試
-            <h2>
-              <p>中文测试</p>
-            </h2></a
-          >
-        </li>
+      <ul class="post-list" v-loading="loading">
+        <article-item
+          v-for="(item, index) in list"
+          :item="item"
+          :key="index"
+        ></article-item>
       </ul>
       <nav class="post-nav">
-        <span class="prev" style="padding-left: 20px;">上一页</span>
-        <span class="next">下一页</span>
+        <span
+          v-show="meta.current_page > 1"
+          @click="handlePrev"
+          class="prev"
+          style="padding-left: 20px;"
+          ><i class="el-icon-arrow-left" />prev</span
+        >
+        <span
+          v-show="meta.last_page > meta.current_page"
+          @click="handleNext"
+          class="next"
+          >next<i class="el-icon-arrow-right"
+        /></span>
       </nav>
     </section>
     <blog-footer></blog-footer>
@@ -101,59 +34,92 @@
 import BlogNav from "@/components/BlogNav";
 import BlogProfile from "@/components/BlogProfile";
 import BlogFooter from "@/components/BlogFooter";
+import ArticleItem from "@/components/ArticleItem";
+import store from "@/store";
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("article");
+import { Message, Loading } from "element-ui";
+import { scrollTo } from "@/utils/scrollTo";
 
 export default {
   name: "Home",
   components: {
     BlogNav,
     BlogProfile,
-    BlogFooter
+    BlogFooter,
+    ArticleItem
+  },
+  data() {
+    return {
+      loading: false
+    };
+  },
+  async beforeRouteEnter(to, from, next) {
+    let loadingInstance = Loading.service({
+      fullscreen: true,
+      text: "拼命加载中呀..."
+    });
+    try {
+      await store.dispatch("article/getArticles");
+      next(() => {
+        loadingInstance.close();
+      });
+    } catch (e) {
+      Message.info(e.response.data.message);
+    }
+  },
+  methods: {
+    ...mapActions(["getArticles"]),
+    async handleNext() {
+      if (this.loading) {
+        return;
+      }
+      let params = {
+        page: this.meta.current_page + 1
+      };
+      this.loading = true;
+      try {
+        await this.getArticles(params);
+        scrollTo(0, 800);
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+      }
+    },
+    async handlePrev() {
+      if (this.loading) {
+        return;
+      }
+      let params = {
+        page: this.meta.current_page - 1
+      };
+      this.loading = true;
+      try {
+        await this.getArticles(params);
+        scrollTo(0, 800);
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+      }
+    }
+  },
+  computed: {
+    ...mapState({
+      list: state => state.list,
+      meta: state => state.meta
+    })
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .home {
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 0 40px 20px 40px;
 
   .post-list {
     margin-top: 0;
-
-    li {
-      list-style-type: none;
-      margin-bottom: 20px;
-      list-style-position: outside;
-      margin-left: 1.5em;
-
-      & + li {
-        padding-top: 20px;
-      }
-
-      a {
-        color: #333;
-        display: block;
-        font: 500 22px/1.7 "Helvetica Neue", helvetica, Arial, sans-serif;
-
-        &:hover {
-          text-decoration: none;
-          color: #5694f1;
-        }
-      }
-
-      .dates {
-        float: right;
-        position: relative;
-        top: 1px;
-        font: 400 17px/1.8 "Helvetica Neue", helvetica, Arial, sans-serif;
-        color: #bbb;
-      }
-
-      p {
-        font: 400 17px/1.8 "Helvetica Neue", helvetica, Arial, sans-serif;
-      }
-    }
   }
 
   .post-nav {

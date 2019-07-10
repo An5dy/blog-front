@@ -46,12 +46,8 @@ export default {
       }
 
       h2 {
-        font-size: 20px;
-        font-weight: 300;
-        color: #aaa;
         margin-top: 10px;
-        font: italic 20px/1.3em Georgia, serif;
-        font-style: normal;
+        font: italic 18px/1.3em Georgia, serif;
       }
     }
   }
