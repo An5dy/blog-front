@@ -46,6 +46,11 @@ const actions = {
     commit("SET_ARTICLE", {});
     return response;
   },
+  async deleteArticle({ commit }, payload) {
+    const response = await ArticleAPI.destroy(payload);
+    commit("SET_ARTICLE", {});
+    return response;
+  },
   async getCategories({ commit }) {
     const response = await ArticleAPI.categories();
     const { data } = response;

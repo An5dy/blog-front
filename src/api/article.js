@@ -16,6 +16,10 @@ const update = (data, id) => {
   return axios.put(`articles/${id}`, data);
 };
 
+const destroy = id => {
+  return axios.delete(`articles/${id}`);
+};
+
 const categories = () => {
   return axios.get("categories");
 };
@@ -25,5 +29,6 @@ export default {
   store,
   categories,
   show,
-  update
+  update,
+  destroy
 };

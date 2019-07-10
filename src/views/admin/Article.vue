@@ -35,14 +35,14 @@
             type="text"
             size="medium"
             icon="el-icon-edit-outline"
-            @click="editArticle(scope.row)"
+            @click="handleEdit(scope.row)"
           />
           <el-button
             type="text"
             size="medium"
             icon="el-icon-delete"
             style="color: #f56c6c;"
-            @click="deleteArticle(scope)"
+            @click="handleDelete(scope.row)"
           />
         </template>
       </el-table-column>
@@ -94,13 +94,27 @@ export default {
         Message.info(error.response.data.message);
       }
     },
-    editArticle(row) {
+    handleEdit(row) {
       this.$router.push({
         name: "article-edit",
         params: {
           id: row.id
         }
       });
+    },
+    handleDelete(row) {
+      this.$confirm("是否删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$store.dispatch("article/deleteArticle", row.id).then(() => {
+            this.getArticles({ page: this.meta.current_page });
+            this.$message.success("删除成功");
+          });
+        })
+        .catch(() => {});
     }
   },
   computed: {
