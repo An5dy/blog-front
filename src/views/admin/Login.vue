@@ -90,6 +90,7 @@ export default {
             })
             .catch(() => {
               this.loading = false;
+              this.$message.error("登录失败");
             });
         } else {
           return false;

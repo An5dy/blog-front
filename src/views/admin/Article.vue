@@ -1,7 +1,8 @@
 <template>
   <div class="artcile-container">
     <el-table v-loading="loading" :data="list" stripe style="width: 100%">
-      <el-table-column prop="id" label="ID" align="center" width="100" />
+      <el-table-column prop="id" label="ID" align="center" />
+      <el-table-column prop="title" align="center" label="标题" width="200" />
       <el-table-column
         prop="category.title"
         label="分类"
@@ -22,15 +23,31 @@
           >
         </template>
       </el-table-column>
-      <el-table-column prop="title" align="center" label="标题" width="200" />
+      <el-table-column prop="skims" align="center" label="浏览量" />
+      <el-table-column prop="likes" align="center" label="点赞量" />
+      <el-table-column prop="comments" align="center" label="评论量" />
       <el-table-column
         prop="created_at"
         align="center"
         width="200"
         label="发布时间"
       />
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center" width="200">
         <template slot-scope="scope">
+          <el-button
+            v-show="scope.row.is_publish === 0"
+            type="text"
+            size="medium"
+            icon="el-icon-top"
+            @click="handleUpper(scope.row)"
+          />
+          <el-button
+            v-show="scope.row.is_publish === 1"
+            type="text"
+            size="medium"
+            icon="el-icon-bottom"
+            @click="handleLower(scope.row)"
+          />
           <el-button
             type="text"
             size="medium"
@@ -78,11 +95,16 @@ export default {
       await store.dispatch("article/getArticles");
       next();
     } catch (e) {
-      Message.info(e.response.data.message);
+      Message.error(e.response.data.message);
     }
   },
   methods: {
-    ...mapActions(["getArticles", "deleteArticle"]),
+    ...mapActions([
+      "getArticles",
+      "deleteArticle",
+      "upperArticle",
+      "lowerArticle"
+    ]),
     async handleCurrentChange(page) {
       if (this.loading) return;
       this.loading = true;
@@ -91,7 +113,7 @@ export default {
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        Message.info(error.response.data.message);
+        this.$message.error(error.response.data.message);
       }
     },
     handleEdit(row) {
@@ -116,8 +138,7 @@ export default {
         })
         .catch(() => {});
     },
-    async handleTagClose(tag, tags) {
-      console.log(tags);
+    handleTagClose(tag, tags) {
       this.$confirm("是否删除?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -131,6 +152,34 @@ export default {
               }
             });
             this.$message.success("删除成功");
+          });
+        })
+        .catch(() => {});
+    },
+    handleUpper(row) {
+      this.$confirm("是否上架?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.upperArticle(row.id).then(() => {
+            row.is_publish = 1;
+            this.$message.success("上架成功");
+          });
+        })
+        .catch(() => {});
+    },
+    handleLower(row) {
+      this.$confirm("是否下架?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.lowerArticle(row.id).then(() => {
+            row.is_publish = 0;
+            this.$message.success("下架成功");
           });
         })
         .catch(() => {});

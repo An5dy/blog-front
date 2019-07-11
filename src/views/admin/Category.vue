@@ -144,7 +144,7 @@ export default {
         this.dialogFormVisible = false;
       } catch (error) {
         this.loading = false;
-        Message.info(error.response.data.message);
+        this.$message.error(error.response.data.message);
       }
     },
     async handleDelete(row) {

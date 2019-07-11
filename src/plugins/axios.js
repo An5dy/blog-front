@@ -71,7 +71,7 @@ export default {
         });
     });
   },
-  put(url, data) {
+  put(url, data = {}) {
     return new Promise((resolve, reject) => {
       data["_method"] = "PATCH";
       service({

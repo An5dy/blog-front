@@ -93,12 +93,12 @@ export default {
       if (this.loading) return;
       this.loading = true;
       try {
-        await this.storeArticle(this.article);
+        await this.storeArticle(this.form);
         this.loading = false;
         this.$router.push("/admin/articles");
       } catch (error) {
         this.loading = false;
-        Message.info(error.response.data.message);
+        this.$message.error(error.response.data.message);
       }
     },
     async handleEdit() {
@@ -114,7 +114,7 @@ export default {
         this.$router.push("/admin/articles");
       } catch (error) {
         this.loading = false;
-        Message.info(error.response.data.message);
+        this.$message.error(error.response.data.message);
       }
     },
     _setForm(article) {

@@ -50,6 +50,16 @@ const actions = {
     const response = await ArticleAPI.destroy(payload);
     commit("SET_ARTICLE", {});
     return response;
+  },
+  async upperArticle({ commit }, payload) {
+    const response = await ArticleAPI.upper(payload);
+    commit("SET_ARTICLE", {});
+    return response;
+  },
+  async lowerArticle({ commit }, payload) {
+    const response = await ArticleAPI.lower(payload);
+    commit("SET_ARTICLE", {});
+    return response;
   }
 };
 
