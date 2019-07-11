@@ -20,7 +20,8 @@ import {
   Tag,
   Select,
   Option,
-  Message
+  Message,
+  Dialog
 } from "element-ui";
 
 Vue.use(Button);
@@ -42,6 +43,7 @@ Vue.use(Pagination);
 Vue.use(Tag);
 Vue.use(Select);
 Vue.use(Option);
+Vue.use(Dialog);
 
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;

@@ -49,7 +49,7 @@ import "mavon-editor/dist/css/index.css";
 import mavonEditorConfig from "@/assets/config/mavonEditor";
 import store from "@/store";
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("article");
+const { mapActions } = createNamespacedHelpers("article");
 import { Message } from "element-ui";
 
 export default {
@@ -71,7 +71,7 @@ export default {
   },
   async beforeRouteEnter(to, from, next) {
     const id = to.params.id;
-    let request = [store.dispatch("article/getCategories")];
+    let request = [store.dispatch("category/getCategories")];
     if (id) {
       request.push(store.dispatch("article/getArticle", id));
     }
@@ -84,7 +84,7 @@ export default {
         });
       })
       .catch(error => {
-        Message.info(error.response.data.message);
+        Message.error(error.response.data.message);
       });
   },
   methods: {
@@ -137,9 +137,9 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      categories: state => state.categories
-    })
+    categories() {
+      return this.$store.state.category.list;
+    }
   }
 };
 </script>

@@ -54,6 +54,14 @@ const router = new Router({
           meta: {
             title: "编辑文章"
           }
+        },
+        {
+          path: "/admin/categories",
+          name: "category-index",
+          component: () => import("./views/admin/Category.vue"),
+          meta: {
+            title: "分类列表"
+          }
         }
       ]
     }
@@ -61,7 +69,13 @@ const router = new Router({
 });
 
 // 需要用户认证路由
-const guard = ["admin", "article-index", "article-create", "article-edit"];
+const guard = [
+  "admin",
+  "article-index",
+  "article-create",
+  "article-edit",
+  "category-index"
+];
 
 router.beforeEach((to, from, next) => {
   if (Token.get()) {

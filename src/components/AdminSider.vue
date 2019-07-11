@@ -17,7 +17,7 @@
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item index="/categories">
+      <el-menu-item index="/admin/categories">
         <i class="el-icon-menu" />
         <span slot="title">分类管理</span>
       </el-menu-item>
