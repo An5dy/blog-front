@@ -5,19 +5,19 @@ const index = params => {
 };
 
 const store = data => {
-  return axios.post("articles", data);
+  return axios.post("admin/articles", data);
 };
 
 const show = id => {
-  return axios.get(`articles/${id}`);
+  return axios.get(`admin/articles/${id}`);
 };
 
 const update = (data, id) => {
-  return axios.put(`articles/${id}`, data);
+  return axios.put(`admin/articles/${id}`, data);
 };
 
 const destroy = id => {
-  return axios.delete(`articles/${id}`);
+  return axios.delete(`admin/articles/${id}`);
 };
 
 const upper = id => {

@@ -62,6 +62,14 @@ const router = new Router({
           meta: {
             title: "分类列表"
           }
+        },
+        {
+          path: "/admin/about",
+          name: "admin-about",
+          component: () => import("./views/admin/About.vue"),
+          meta: {
+            title: "关于"
+          }
         }
       ]
     }
@@ -74,7 +82,8 @@ const guard = [
   "article-index",
   "article-create",
   "article-edit",
-  "category-index"
+  "category-index",
+  "admin-about"
 ];
 
 router.beforeEach((to, from, next) => {

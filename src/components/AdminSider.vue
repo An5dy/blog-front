@@ -21,7 +21,7 @@
         <i class="el-icon-menu" />
         <span slot="title">分类管理</span>
       </el-menu-item>
-      <el-menu-item index="/about">
+      <el-menu-item index="/admin/about">
         <i class="el-icon-setting" />
         <span slot="title">关于</span>
       </el-menu-item>
