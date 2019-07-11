@@ -50,12 +50,6 @@ const actions = {
     const response = await ArticleAPI.destroy(payload);
     commit("SET_ARTICLE", {});
     return response;
-  },
-  async getCategories({ commit }) {
-    const response = await ArticleAPI.categories();
-    const { data } = response;
-    commit("SET_CATEGORIES", data);
-    return response;
   }
 };
 

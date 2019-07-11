@@ -20,14 +20,9 @@ const destroy = id => {
   return axios.delete(`articles/${id}`);
 };
 
-const categories = () => {
-  return axios.get("categories");
-};
-
 export default {
   index,
   store,
-  categories,
   show,
   update,
   destroy

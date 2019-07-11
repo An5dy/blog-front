@@ -16,7 +16,7 @@
             closable
             size="mini"
             style="margin-right: 5px"
-            @close="handleTagClose(index, scope.row.tags)"
+            @close="handleTagClose(tag, scope.row.tags)"
             type="primary"
             >{{ tag.title }}</el-tag
           >
@@ -82,7 +82,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["getArticles"]),
+    ...mapActions(["getArticles", "deleteArticle"]),
     async handleCurrentChange(page) {
       if (this.loading) return;
       this.loading = true;
@@ -109,8 +109,27 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.$store.dispatch("article/deleteArticle", row.id).then(() => {
+          this.deleteArticle(row.id).then(() => {
             this.getArticles({ page: this.meta.current_page });
+            this.$message.success("删除成功");
+          });
+        })
+        .catch(() => {});
+    },
+    async handleTagClose(tag, tags) {
+      console.log(tags);
+      this.$confirm("是否删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$store.dispatch("tag/deleteCategory", tag.id).then(() => {
+            tags.forEach((item, index, array) => {
+              if (item.id === tag.id) {
+                array.splice(index, 1);
+              }
+            });
             this.$message.success("删除成功");
           });
         })
