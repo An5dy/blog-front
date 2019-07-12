@@ -20,7 +20,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
-      config.headers["Authorization"] = "Bearer " + Token.get();
+      config.headers["Authorization"] = Token.get();
     }
     Nprogress.start();
     return config;
@@ -32,10 +32,20 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
+    let token = response.headers.authorization;
+    if (token) {
+      store.dispatch("login/refreshToken", token);
+    }
     Nprogress.done();
     return response.data;
   },
   error => {
+    let status = error.response.status;
+    switch (status) {
+      case 401:
+        return store.dispatch("login/resetToken");
+    }
+
     return Promise.reject(error);
   }
 );

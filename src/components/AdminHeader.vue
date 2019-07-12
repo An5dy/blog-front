@@ -19,12 +19,54 @@
         </el-dropdown-menu>
       </el-dropdown>
     </el-menu>
+
+    <!-- 修改密码 -->
+    <el-dialog title="修改密码" :visible.sync="dialogFormVisible" width="400px">
+      <el-form :model="user">
+        <el-form-item label="原密码" label-position="top">
+          <el-input
+            size="small"
+            v-model="user.old_password"
+            auto-complete="off"
+          />
+        </el-form-item>
+        <el-form-item label="新密码" size="small" label-position="top">
+          <el-input v-model="user.new_password" auto-complete="off" />
+        </el-form-item>
+        <el-form-item label="确认密码" size="small" label-position="top">
+          <el-input
+            v-model="user.new_password_confirmation"
+            auto-complete="off"
+          />
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="small" @click="dialogFormVisible = false"
+          >取 消</el-button
+        >
+        <el-button type="primary" size="small" @click="onSubmit"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import LoginAPI from "@/api/login";
+
 export default {
   name: "AdminHeader",
+  data() {
+    return {
+      user: {
+        old_password: null,
+        new_password: null,
+        new_password_confirmation: null
+      },
+      dialogFormVisible: false
+    };
+  },
   methods: {
     handleCommand(command) {
       if (command === "logout") {
@@ -34,7 +76,7 @@ export default {
           type: "warning"
         })
           .then(() => {
-            this.$store.dispatch("logout").then(() => {
+            this.$store.dispatch("login/logout").then(() => {
               location.reload();
             });
           })
@@ -45,15 +87,14 @@ export default {
       }
     },
     onSubmit() {
-      // reset(this.user).then(() => {
-      //   this.dialogFormVisible = false;
-      //   this.$notify({
-      //     title: "成功",
-      //     message: "修改成功",
-      //     type: "success",
-      //     duration: 2000
-      //   });
-      // });
+      LoginAPI.password(this.user)
+        .then(() => {
+          this.dialogFormVisible = false;
+          this.$message.success("密码修改成功");
+        })
+        .catch(() => {
+          this.$message.error("密码修改失败");
+        });
     }
   }
 };
@@ -94,5 +135,9 @@ export default {
     right: 35px;
     top: 0px;
   }
+}
+
+.dialog-footer {
+  text-align: right;
 }
 </style>
