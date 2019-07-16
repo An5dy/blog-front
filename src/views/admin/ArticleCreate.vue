@@ -1,11 +1,11 @@
 <template>
   <el-form>
     <el-form-item label="标题">
-      <el-input v-model="form.title" size="small" style="width: 450px" />
+      <el-input v-model="article.title" size="small" style="width: 450px" />
     </el-form-item>
     <el-form-item label="分类">
       <el-select
-        v-model="form.category_id"
+        v-model="article.category_id"
         size="small"
         placeholder="请选择分类"
       >
@@ -18,7 +18,7 @@
       </el-select>
     </el-form-item>
     <el-form-item label="正文">
-      <mavon-editor :toolbars="toolbars" v-model="form.main"></mavon-editor>
+      <markdown-edit ref="md" :main.sync="article.main"></markdown-edit>
     </el-form-item>
     <el-form-item>
       <el-button
@@ -27,7 +27,7 @@
         type="primary"
         :loading="loading"
         @click="handleCreate"
-        v-if="form.id === null"
+        v-if="article.id === null"
         >确认发布</el-button
       >
       <el-button
@@ -44,29 +44,20 @@
 </template>
 
 <script>
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
-import mavonEditorConfig from "@/assets/config/mavonEditor";
 import store from "@/store";
 import { createNamespacedHelpers } from "vuex";
 const { mapActions } = createNamespacedHelpers("article");
 import { Message } from "element-ui";
+import MarkdownEdit from "@/components/MarkdownEdit";
 
 export default {
   name: "ArticleCreate",
   components: {
-    mavonEditor
+    MarkdownEdit
   },
   data() {
     return {
-      toolbars: mavonEditorConfig.toolbars,
-      loading: false,
-      form: {
-        id: null,
-        category_id: null,
-        main: "",
-        title: ""
-      }
+      loading: false
     };
   },
   async beforeRouteEnter(to, from, next) {
@@ -76,12 +67,8 @@ export default {
       request.push(store.dispatch("article/getArticle", id));
     }
     await Promise.all(request)
-      .then(response => {
-        next(vm => {
-          if (id) {
-            vm._setForm(response[1].data);
-          }
-        });
+      .then(() => {
+        next();
       })
       .catch(error => {
         Message.error(error.response.data.message);
@@ -93,7 +80,7 @@ export default {
       if (this.loading) return;
       this.loading = true;
       try {
-        await this.storeArticle(this.form);
+        await this.storeArticle(this.article);
         this.loading = false;
         this.$router.push("/admin/articles");
       } catch (error) {
@@ -104,9 +91,14 @@ export default {
     async handleEdit() {
       if (this.loading) return;
       this.loading = true;
+      const { title, category_id, main } = this.article;
       const payload = {
         id: this.$route.params.id,
-        data: this.form
+        data: {
+          title: title,
+          category_id: category_id,
+          main: main
+        }
       };
       try {
         await this.updateArticle(payload);
@@ -116,32 +108,23 @@ export default {
         this.loading = false;
         this.$message.error(error.response.data.message);
       }
-    },
-    _setForm(article) {
-      this.form = {
-        id: article.id,
-        category_id: article.category.id,
-        main: article.main,
-        title: article.title
-      };
     }
   },
   watch: {
-    $route() {
-      this.form = {
-        id: null,
-        category_id: null,
-        main: "",
-        title: ""
-      };
+    $route(to) {
+      if (to.name === "article-create") {
+        this.$store.dispatch("article/initArticle");
+      }
+      this.$refs.md.content = this.article.main;
     }
   },
   computed: {
     categories() {
       return this.$store.state.category.list;
+    },
+    article() {
+      return this.$store.state.article.article;
     }
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

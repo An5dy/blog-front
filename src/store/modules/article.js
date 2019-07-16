@@ -4,7 +4,12 @@ const state = {
   list: [],
   meta: {},
   categories: [],
-  article: {}
+  article: {
+    id: null,
+    category_id: null,
+    main: "",
+    title: ""
+  }
 };
 
 const mutations = {
@@ -19,6 +24,14 @@ const mutations = {
   },
   SET_ARTICLE: (state, action) => {
     state.article = action;
+  },
+  INIT_ARTICLE: state => {
+    state.article = {
+      id: null,
+      category_id: null,
+      main: "",
+      title: ""
+    };
   }
 };
 
@@ -32,34 +45,43 @@ const actions = {
   },
   async storeArticle({ commit }, payload) {
     const response = await ArticleAPI.store(payload);
-    commit("SET_ARTICLE", {});
+    commit("INIT_ARTICLE");
     return response;
   },
   async getArticle({ commit }, payload) {
     const response = await ArticleAPI.show(payload);
-    commit("SET_ARTICLE", {});
+    const { id, title, category, main } = response.data;
+    commit("SET_ARTICLE", {
+      id: id,
+      category_id: category.id,
+      main: main,
+      title: title
+    });
     return response;
   },
   async updateArticle({ commit }, payload) {
     const { id, data } = payload;
     const response = await ArticleAPI.update(data, id);
-    commit("SET_ARTICLE", {});
+    commit("INIT_ARTICLE");
     return response;
   },
   async deleteArticle({ commit }, payload) {
     const response = await ArticleAPI.destroy(payload);
-    commit("SET_ARTICLE", {});
+    commit("INIT_ARTICLE");
     return response;
   },
   async upperArticle({ commit }, payload) {
     const response = await ArticleAPI.upper(payload);
-    commit("SET_ARTICLE", {});
+    commit("INIT_ARTICLE");
     return response;
   },
   async lowerArticle({ commit }, payload) {
     const response = await ArticleAPI.lower(payload);
-    commit("SET_ARTICLE", {});
+    commit("INIT_ARTICLE");
     return response;
+  },
+  initArticle({ commit }) {
+    commit("INIT_ARTICLE");
   }
 };
 
