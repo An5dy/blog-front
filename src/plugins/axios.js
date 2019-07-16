@@ -66,11 +66,12 @@ export default {
         });
     });
   },
-  post(url, data) {
+  post(url, data, headers = {}) {
     return new Promise((resolve, reject) => {
       service({
         url: url,
         method: "post",
+        headers,
         data
       })
         .then(response => {

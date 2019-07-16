@@ -1,7 +1,7 @@
 <template>
   <el-form :model="about">
     <el-form-item>
-      <mavon-editor ref="md" v-model="about.main" :toolbars="toolbars" />
+      <markdown-edit :main.sync="about.main"></markdown-edit>
     </el-form-item>
     <el-form-item>
       <el-button
@@ -16,22 +16,19 @@
 </template>
 
 <script>
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
-import mavonEditorConfig from "@/assets/config/mavonEditor";
 import store from "@/store";
 import { createNamespacedHelpers } from "vuex";
 const { mapActions, mapState } = createNamespacedHelpers("about");
 import { Message } from "element-ui";
+import MarkdownEdit from "@/components/MarkdownEdit";
 
 export default {
   name: "About",
   components: {
-    mavonEditor
+    MarkdownEdit
   },
   data() {
     return {
-      toolbars: mavonEditorConfig.toolbars,
       loading: false
     };
   },
