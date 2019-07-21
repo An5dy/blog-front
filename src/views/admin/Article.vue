@@ -35,14 +35,14 @@
       <el-table-column label="操作" align="center" width="200">
         <template slot-scope="scope">
           <el-button
-            v-show="scope.row.is_publish === 0"
+            v-show="scope.row.is_published === 0"
             type="text"
             size="medium"
             icon="el-icon-top"
             @click="handleUpper(scope.row)"
           />
           <el-button
-            v-show="scope.row.is_publish === 1"
+            v-show="scope.row.is_published === 1"
             type="text"
             size="medium"
             icon="el-icon-bottom"
@@ -164,8 +164,8 @@ export default {
       })
         .then(() => {
           this.upperArticle(row.id).then(() => {
-            row.is_publish = 1;
-            this.$message.success("上架成功");
+            row.is_published = 1;
+            this.$message.success("发布成功");
           });
         })
         .catch(() => {});
@@ -178,8 +178,8 @@ export default {
       })
         .then(() => {
           this.lowerArticle(row.id).then(() => {
-            row.is_publish = 0;
-            this.$message.success("下架成功");
+            row.is_published = 0;
+            this.$message.success("撤回成功");
           });
         })
         .catch(() => {});

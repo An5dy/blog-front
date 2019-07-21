@@ -43,6 +43,13 @@ const actions = {
     commit("SET_META", meta);
     return response;
   },
+  async getFrontArticles({ commit }, payload) {
+    const response = await ArticleAPI.frontIndex(payload);
+    const { data, meta } = response;
+    commit("SET_LIST", data);
+    commit("SET_META", meta);
+    return response;
+  },
   async storeArticle({ commit }, payload) {
     const response = await ArticleAPI.store(payload);
     commit("INIT_ARTICLE");
@@ -57,6 +64,12 @@ const actions = {
       main: main,
       title: title
     });
+    return response;
+  },
+  async getFrontArticle({ commit }, payload) {
+    const response = await ArticleAPI.frontShow(payload);
+    const article = response.data;
+    commit("SET_ARTICLE", article);
     return response;
   },
   async updateArticle({ commit }, payload) {
@@ -82,6 +95,14 @@ const actions = {
   },
   initArticle({ commit }) {
     commit("INIT_ARTICLE");
+  },
+  async getArticlesByCategory({ commit }, payload) {
+    const { category, params } = payload;
+    const response = await ArticleAPI.articles(category, params);
+    const { data, meta } = response;
+    commit("SET_LIST", data);
+    commit("SET_META", meta);
+    return response;
   }
 };
 

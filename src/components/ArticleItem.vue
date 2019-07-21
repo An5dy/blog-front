@@ -1,12 +1,12 @@
 <template>
   <li>
     <aside class="dates">{{ item.created_at }}</aside>
-    <a href="#">
+    <router-link :to="{ name: 'article-show', params: { id: item.id } }">
       {{ item.title }}
       <h2>
-        <p>{{ item.main }}</p>
+        <p>{{ item.sketch }}</p>
       </h2>
-    </a>
+    </router-link>
   </li>
 </template>
 
@@ -36,7 +36,7 @@ li {
   a {
     color: #333;
     display: block;
-    font: 500 22px/1.7 "Helvetica Neue", helvetica, Arial, sans-serif;
+    font: 500 22px/1.8 "Helvetica Neue", helvetica, Arial, sans-serif;
 
     &:hover {
       text-decoration: none;
@@ -53,7 +53,7 @@ li {
   }
 
   p {
-    font: 400 17px/1.8 "Helvetica Neue", helvetica, Arial, sans-serif;
+    font: 400 16px/1.9 "Helvetica Neue", helvetica, Arial, sans-serif;
   }
 }
 </style>

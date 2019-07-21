@@ -9,12 +9,31 @@ const router = new Router({
     {
       path: "/",
       name: "home",
-      component: () => import("./views/Home.vue")
+      component: () => import("./views/Home.vue"),
+      meta: {
+        title: "Andy's Blog"
+      }
+    },
+    {
+      path: "/categories/:category/articles",
+      name: "category-articles",
+      component: () => import("./views/Home.vue"),
+      meta: {
+        title: "Andy's Blog"
+      }
     },
     {
       path: "/about",
       name: "about",
-      component: () => import("./views/About.vue")
+      component: () => import("./views/About.vue"),
+      meta: {
+        title: "关于我呀"
+      }
+    },
+    {
+      path: "/articles/:id",
+      name: "article-show",
+      component: () => import("./views/ArticleShow.vue")
     },
     {
       path: "/admin/login",
@@ -27,8 +46,7 @@ const router = new Router({
       component: () => import("./views/admin/Layout.vue"),
       redirect: "/admin/articles",
       meta: {
-        title: "首页",
-        icon: "home"
+        title: "首页"
       },
       children: [
         {

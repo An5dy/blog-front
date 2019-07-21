@@ -1,6 +1,6 @@
 <template>
   <nav class="main-nav">
-    <a href="#">Home</a>
+    <router-link to="/">Home</router-link>
     <a href="#">Archives</a>
     <a href="#">Search</a>
   </nav>

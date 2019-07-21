@@ -2,9 +2,9 @@
   <div class="profile">
     <section class="wrapper">
       <header class="header">
-        <a href="#">
+        <router-link :to="{ name: 'about' }">
           <img class="avatar" src="@/assets/avatar.png" />
-        </a>
+        </router-link>
         <h1>Dxx</h1>
         <h2>A simple Developer</h2>
       </header>

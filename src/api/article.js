@@ -4,12 +4,20 @@ const index = params => {
   return axios.get("admin/articles", params);
 };
 
+const frontIndex = params => {
+  return axios.get("articles", params);
+};
+
 const store = data => {
   return axios.post("admin/articles", data);
 };
 
 const show = id => {
   return axios.get(`admin/articles/${id}`);
+};
+
+const frontShow = id => {
+  return axios.get(`articles/${id}`);
 };
 
 const update = (data, id) => {
@@ -28,12 +36,19 @@ const lower = id => {
   return axios.put(`admin/articles/${id}/lower`);
 };
 
+const articles = (category, params) => {
+  return axios.get(`categories/${category}/articles`, params);
+};
+
 export default {
   index,
+  frontIndex,
   store,
   show,
+  frontShow,
   update,
   destroy,
   upper,
-  lower
+  lower,
+  articles
 };

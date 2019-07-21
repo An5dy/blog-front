@@ -8,6 +8,9 @@ aside,
 section,
 a,
 p,
+pre,
+code,
+img,
 body {
   border: 0;
   font-size: 100%;
@@ -15,6 +18,12 @@ body {
   vertical-align: baseline;
   margin: 0;
   padding: 0
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 3px
 }
 
 p {
@@ -64,6 +73,15 @@ h1 {
 
 h2 {
   color: #bbb
+}
+
+code {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+  font-size: 90%;
 }
 
 .fade-transform-leave-active,

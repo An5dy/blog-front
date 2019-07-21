@@ -28,11 +28,11 @@ const actions = {
   },
   async logout({ commit }) {
     await LoginAPI.logout();
-    Token.set("");
+    Token.del();
     commit("SET_TOKEN", "");
   },
   resetToken({ commit }) {
-    Token.set("");
+    Token.del();
     commit("SET_TOKEN", "");
     location.reload();
   }

@@ -43,9 +43,11 @@ service.interceptors.response.use(
     let status = error.response.status;
     switch (status) {
       case 401:
-        return store.dispatch("login/resetToken");
+        if (Token.get()) {
+          return store.dispatch("login/resetToken");
+        }
     }
-
+    Nprogress.done();
     return Promise.reject(error);
   }
 );

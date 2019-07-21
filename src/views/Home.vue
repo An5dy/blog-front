@@ -59,46 +59,53 @@ export default {
       fullscreen: true,
       text: "拼命加载中呀..."
     });
+    const params = to.params;
     try {
-      await store.dispatch("article/getArticles");
+      if (JSON.stringify(params) === "{}") {
+        await store.dispatch("article/getFrontArticles");
+      } else {
+        await store.dispatch("article/getArticlesByCategory", {
+          category: params.category,
+          params: {}
+        });
+      }
       next(() => {
         loadingInstance.close();
       });
-    } catch (e) {
-      Message.info(e.response.data.message);
+    } catch (error) {
+      Message.error(error.response.data.message);
+      loadingInstance.close();
     }
   },
   methods: {
-    ...mapActions(["getArticles"]),
+    ...mapActions(["getFrontArticles", "getArticlesByCategory"]),
     async handleNext() {
-      if (this.loading) {
-        return;
-      }
-      let params = {
-        page: this.meta.current_page + 1
-      };
-      this.loading = true;
-      try {
-        await this.getArticles(params);
-        scrollTo(0, 800);
-        this.loading = false;
-      } catch (err) {
-        this.loading = false;
-      }
+      await this._getArticles(this.meta.current_page + 1);
     },
     async handlePrev() {
+      await this._getArticles(this.meta.current_page - 1);
+    },
+    async _getArticles(page) {
       if (this.loading) {
         return;
       }
-      let params = {
-        page: this.meta.current_page - 1
-      };
       this.loading = true;
+      let routeParams = this.$route.params;
+      let params = {
+        page: page
+      };
       try {
-        await this.getArticles(params);
+        if (JSON.stringify(routeParams) === "{}") {
+          await this.getFrontArticles(params);
+        } else {
+          await this.getArticlesByCategory({
+            category: routeParams.category,
+            params: params
+          });
+        }
         scrollTo(0, 800);
         this.loading = false;
-      } catch (err) {
+      } catch (error) {
         this.loading = false;
       }
     }

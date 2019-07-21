@@ -2,7 +2,7 @@ import AboutAPI from "@/api/about";
 
 const state = {
   about: {
-    main: null
+    main: ""
   }
 };
 
@@ -15,8 +15,18 @@ const mutations = {
 const actions = {
   async getAbout({ commit }) {
     const response = await AboutAPI.index();
-    const { main } = response.data;
-    commit("SET_ABOUT", main);
+    if (response.data.length !== 0) {
+      const { main } = response.data;
+      commit("SET_ABOUT", main);
+    }
+    return response;
+  },
+  async getFrontAbout({ commit }) {
+    const response = await AboutAPI.frontIndex();
+    if (response.data.length !== 0) {
+      const { main } = response.data;
+      commit("SET_ABOUT", main);
+    }
     return response;
   },
   async updateOrCreateAbout({ commit }, payload) {
