@@ -5,6 +5,7 @@ import login from "./modules/login";
 import category from "./modules/category";
 import tag from "./modules/tag";
 import about from "./modules/about";
+import archive from "./modules/archive";
 
 import getters from "./getters";
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     login,
     category,
     tag,
-    about
+    about,
+    archive
   },
   getters
 });

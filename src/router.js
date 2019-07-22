@@ -36,6 +36,14 @@ const router = new Router({
       component: () => import("./views/ArticleShow.vue")
     },
     {
+      path: "/archives",
+      name: "archive-index",
+      component: () => import("./views/Archive.vue"),
+      meta: {
+        title: "归档"
+      }
+    },
+    {
       path: "/admin/login",
       name: "login",
       component: () => import("./views/admin/Login.vue")
