@@ -1,14 +1,10 @@
 <template>
   <div>
-    <blog-nav></blog-nav>
-    <blog-profile></blog-profile>
+    <blog-nav />
+    <blog-profile />
     <section class="home">
       <ul class="post-list" v-loading="loading">
-        <article-item
-          v-for="(item, index) in list"
-          :item="item"
-          :key="index"
-        ></article-item>
+        <article-item v-for="(item, index) in list" :item="item" :key="index" />
       </ul>
       <nav class="post-nav">
         <span
@@ -26,7 +22,7 @@
         /></span>
       </nav>
     </section>
-    <blog-footer></blog-footer>
+    <blog-footer />
   </div>
 </template>
 

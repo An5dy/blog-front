@@ -44,6 +44,14 @@ const router = new Router({
       }
     },
     {
+      path: "/search",
+      name: "article-search",
+      component: () => import("./views/Search.vue"),
+      meta: {
+        title: "搜索"
+      }
+    },
+    {
       path: "/admin/login",
       name: "login",
       component: () => import("./views/admin/Login.vue")

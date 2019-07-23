@@ -1,7 +1,7 @@
 <template>
   <div>
-    <blog-nav></blog-nav>
-    <blog-profile></blog-profile>
+    <blog-nav />
+    <blog-profile />
     <section class="post">
       <article>
         <header>
@@ -19,10 +19,10 @@
             >
           </h2>
         </header>
-        <markdown-to-html :markdown="article.main"></markdown-to-html>
+        <markdown-to-html :markdown="article.main" />
       </article>
     </section>
-    <blog-footer></blog-footer>
+    <blog-footer />
   </div>
 </template>
 

@@ -6,6 +6,7 @@ import category from "./modules/category";
 import tag from "./modules/tag";
 import about from "./modules/about";
 import archive from "./modules/archive";
+import search from "./modules/search";
 
 import getters from "./getters";
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     category,
     tag,
     about,
-    archive
+    archive,
+    search
   },
   getters
 });

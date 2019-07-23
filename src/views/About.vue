@@ -1,13 +1,13 @@
 <template>
   <div>
-    <blog-nav></blog-nav>
-    <blog-profile></blog-profile>
+    <blog-nav />
+    <blog-profile />
     <section class="about">
       <article>
-        <markdown-to-html :markdown="about.main"></markdown-to-html>
+        <markdown-to-html :markdown="about.main" />
       </article>
     </section>
-    <blog-footer></blog-footer>
+    <blog-footer />
   </div>
 </template>
 

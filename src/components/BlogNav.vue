@@ -1,8 +1,10 @@
 <template>
   <nav class="main-nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/archives">Archives</router-link>
-    <a href="#">Search</a>
+    <router-link to="/" exact-active-class="active">Home</router-link>
+    <router-link to="/archives" exact-active-class="active"
+      >Archives</router-link
+    >
+    <router-link to="/search" exact-active-class="active">Search</router-link>
   </nav>
 </template>
 
@@ -24,10 +26,19 @@ export default {
     top: 8px;
     right: 6px;
     padding: 8px 12px;
-    color: #5badf0;
+    color: #8a8a8a;
     font-size: 13px;
     line-height: 1.35;
     border-radius: 3px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: #5694f1;
+    }
+  }
+
+  .active {
+    color: #5694f1;
   }
 }
 </style>

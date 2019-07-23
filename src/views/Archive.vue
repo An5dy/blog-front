@@ -1,7 +1,7 @@
 <template>
   <div>
-    <blog-nav></blog-nav>
-    <blog-profile></blog-profile>
+    <blog-nav />
+    <blog-profile />
     <section class="main">
       <div v-for="(items, index) in archives" :key="index" class="archive">
         <h3>{{ index }}</h3>
@@ -17,7 +17,7 @@
         </ul>
       </div>
     </section>
-    <blog-footer></blog-footer>
+    <blog-footer />
   </div>
 </template>
 

@@ -21,7 +21,8 @@ import {
   Select,
   Option,
   Message,
-  Dialog
+  Dialog,
+  Autocomplete
 } from "element-ui";
 
 Vue.use(Button);
@@ -44,6 +45,7 @@ Vue.use(Tag);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Dialog);
+Vue.use(Autocomplete);
 
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;

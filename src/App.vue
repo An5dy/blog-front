@@ -1,11 +1,19 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="fade-transform" mode="out-in">
+      <router-view />
+    </transition>
+    <back-to-top></back-to-top>
   </div>
 </template>
 
 <script>
+import BackToTop from "@/components/BackToTop";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    BackToTop
+  }
 };
 </script>
