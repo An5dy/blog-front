@@ -8,6 +8,7 @@
         v-model="search"
         :fetch-suggestions="handleSearch"
         @select="handleSelect"
+        placeholder="请输入要搜索的内容..."
       >
         <el-button slot="append" icon="el-icon-search" />
       </el-autocomplete>

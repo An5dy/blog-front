@@ -3,7 +3,7 @@
     <transition name="fade-transform" mode="out-in">
       <router-view />
     </transition>
-    <back-to-top></back-to-top>
+    <back-to-top />
   </div>
 </template>
 
