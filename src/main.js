@@ -5,6 +5,11 @@ import store from "./store";
 import "./plugins/element.js";
 import "./styles/index.scss";
 
+import "./assets/icons/github";
+import "vue-awesome/icons/heart";
+import Icon from "vue-awesome/components/Icon";
+Vue.component("Icon", Icon);
+
 Vue.config.productionTip = false;
 
 new Vue({

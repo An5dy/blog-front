@@ -1,16 +1,16 @@
 <template>
   <footer class="footer">
     <div class="social">
-      <a class="symbol" href="https://github.com/fuzhouxxdong">
-        <i class="fa fa-github"></i>
+      <a class="symbol" href="https://github.com/An5dy" target="_blank">
+        <icon name="github" scale="2" />
       </a>
       <p class="small">
         © Copyright 2018 &nbsp;
-        <i class="fa fa-heart" aria-hidden="true">&nbsp;Dxx</i>
+        <span class="heart"><icon name="heart" scale="0.9" />&nbsp;Andy</span>
       </p>
       <p class="small">
         Powered by &nbsp;
-        <a href="https://hexo.io/">Hexo &nbsp;</a>
+        <a href="https://lumen.laravel.com" target="_blank">Lumen &nbsp;</a>
         Theme By &nbsp;
         <a href="https://github.com/fuzhouxxdong/hexo-theme-dxx">Dxx</a>
       </p>
@@ -52,6 +52,14 @@ export default {
 
       a {
         color: #bbb;
+      }
+
+      .heart {
+        &:hover {
+          color: #ff3356;
+          transition: 0.7s ease-out;
+          cursor: pointer;
+        }
       }
     }
   }
