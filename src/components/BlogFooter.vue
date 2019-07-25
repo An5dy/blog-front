@@ -12,7 +12,9 @@
         Powered by &nbsp;
         <a href="https://lumen.laravel.com" target="_blank">Lumen &nbsp;</a>
         Theme By &nbsp;
-        <a href="https://github.com/fuzhouxxdong/hexo-theme-dxx">Dxx</a>
+        <a href="https://github.com/fuzhouxxdong/hexo-theme-dxx" target="_blank"
+          >Dxx</a
+        >
       </p>
     </div>
   </footer>

@@ -10,6 +10,9 @@ import "vue-awesome/icons/heart";
 import Icon from "vue-awesome/components/Icon";
 Vue.component("Icon", Icon);
 
+import VueDisqus from "vue-disqus";
+Vue.use(VueDisqus);
+
 Vue.config.productionTip = false;
 
 new Vue({

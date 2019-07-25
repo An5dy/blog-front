@@ -128,7 +128,7 @@ export default {
   .post-nav {
     text-align: center;
     padding-top: 20px;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     margin-top: 40px;
 

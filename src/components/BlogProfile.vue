@@ -5,7 +5,7 @@
         <router-link :to="{ name: 'about' }">
           <img class="avatar" src="@/assets/avatar.png" />
         </router-link>
-        <h1>Dxx</h1>
+        <h1>Andy's</h1>
         <h2>A simple Developer</h2>
       </header>
     </section>

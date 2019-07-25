@@ -7,6 +7,7 @@
         <markdown-to-html :markdown="about.main" />
       </article>
     </section>
+    <blog-comment />
     <blog-footer />
   </div>
 </template>
@@ -20,6 +21,7 @@ import { createNamespacedHelpers } from "vuex";
 const { mapState } = createNamespacedHelpers("about");
 import { Message, Loading } from "element-ui";
 import MarkdownToHtml from "@/components/MarkdownToHtml";
+import BlogComment from "@/components/BlogComment";
 
 export default {
   name: "About",
@@ -27,7 +29,8 @@ export default {
     BlogNav,
     BlogProfile,
     BlogFooter,
-    MarkdownToHtml
+    MarkdownToHtml,
+    BlogComment
   },
   async beforeRouteEnter(to, from, next) {
     let loadingInstance = Loading.service({
