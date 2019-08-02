@@ -1,0 +1,162 @@
+nav,
+header,
+h1,
+h2,
+ul,
+li,
+aside,
+section,
+a,
+p,
+pre,
+code,
+img,
+body {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 3px
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both
+}
+
+section {
+  display: block;
+}
+
+body {
+  font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #666;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -ms-transition: all .15s ease-in-out;
+  -o-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
+}
+
+h1 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  color: #222;
+  font-weight: bold
+}
+
+h2 {
+  color: #bbb
+}
+
+code {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+  font-size: 90%;
+}
+
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+blockquote {
+  color: #333;
+  padding: 0.5em 0.8em;
+  border-left: .25em solid #dfe2e5;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  background:  #f8f8f8;
+  font-size: 90%;
+
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+@media screen and (max-width:540px) {
+  .footer {
+    margin-top: 60px !important;
+  }
+
+  .home {
+    padding: 0 20px 20px 20px !important;
+  }
+
+  .dates {
+    display: none !important;
+  }
+
+  .post {
+    padding: 0 20px 20px 20px !important;
+
+    h1 {
+      font-size: 24px !important;
+    }
+  }
+
+  .search {
+    padding: 0 20px 20px 20px !important;
+  }
+
+  .about {
+    padding: 0 20px 20px 20px !important;
+  }
+
+  .comment {
+    padding: 40px 20px 20px 20px !important;
+  }
+}
+
+@media(max-width:700px) {
+  nav.main-nav {
+    padding: 20px 10px 0 0 !important;
+  }
+
+  nav.main-nav a {
+    padding: 8px 8px !important;
+  }
+}

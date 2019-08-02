@@ -1,3 +1,4 @@
+require('dotenv').config()
 export default {
   mode: 'universal',
   /*
@@ -19,15 +20,23 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#1abc9c' },
+  /*
+   ** 首页加载 loading
+   */
+  loadingIndicator: {
+    name: 'rectangle-bounce',
+    color: '#1abc9c',
+    background: 'white'
+  },
   /*
    ** Global CSS
    */
-  css: ['element-ui/lib/theme-chalk/index.css'],
+  css: ['element-ui/lib/theme-chalk/index.css', '@/styles/index.scss'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '@/plugins/element-ui', ssr: false }],
+  plugins: ['@/plugins/element-ui', '@/plugins/awesome'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -40,18 +49,31 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true,
+    prefix: '/api'
+  },
+  /*
+   ** 设置跨域地址
+   */
+  proxy: {
+    '/api': {
+      target: process.env.API_URL
+    }
+  },
   /*
    ** Build configuration
    */
   build: {
-    transpile: [/^element-ui/],
+    transpile: [/^vue-awesome/, /^element-ui/],
     babel: {
       plugins: [
         [
@@ -66,15 +88,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
+    extend(config, ctx) {}
   }
 }
