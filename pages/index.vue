@@ -8,6 +8,7 @@
       <h2 class="subtitle">
         ssr 渲染 blogblog
       </h2>
+      <el-button type="primary">确认</el-button>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">
           Documentation
