@@ -1,9 +1,7 @@
 <template>
   <nav class="main-nav">
-    <router-link to="/" exact-active-class="active">Home</router-link>
-    <router-link to="/archives" exact-active-class="active"
-      >Archives</router-link
-    >
+    <nuxt-link to="/" exact-active-class="active">Home</nuxt-link>
+    <nuxt-link to="/archives" exact-active-class="active">Archives</nuxt-link>
     <router-link to="/search" exact-active-class="active">Search</router-link>
   </nav>
 </template>

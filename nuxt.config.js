@@ -36,7 +36,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/element-ui', '@/plugins/awesome'],
+  plugins: ['@/plugins/element-ui', '@/plugins/awesome', '@/plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -58,8 +58,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    proxy: true,
-    prefix: '/api'
+    proxy: true
   },
   /*
    ** 设置跨域地址
