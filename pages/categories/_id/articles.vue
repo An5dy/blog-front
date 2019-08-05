@@ -4,7 +4,11 @@
       <blog-item v-for="(item, index) in list" :key="index" :item="item" />
     </ul>
     <nav class="post-nav">
-      <span v-show="meta.current_page > 1" class="prev" @click="handlePrev"
+      <span
+        v-show="meta.current_page > 1"
+        class="prev"
+        style="padding-left: 20px;"
+        @click="handlePrev"
         ><i class="el-icon-arrow-left" />prev</span
       >
       <span
@@ -31,13 +35,13 @@ export default {
     },
     meta() {
       return this.$store.state.article.meta
-    },
-    loading() {
-      return this.$store.state.article.loading
     }
   },
-  async asyncData({ store }) {
-    await store.dispatch('article/fetchArticles')
+  async asyncData({ store, params }) {
+    await store.dispatch('article/fecthArticlesByCategory', {
+      category: params.id,
+      params: {}
+    })
   },
   methods: {
     async handleNext() {
@@ -47,9 +51,15 @@ export default {
       await this._getArticles(this.meta.current_page - 1)
     },
     async _getArticles(page) {
+      const routeParams = this.$route.params
       const params = {}
       params.page = page
-      await this.$store.dispatch('article/fetchArticles', params)
+      await this.$store.dispatch('article/fecthArticlesByCategory', {
+        category: routeParams.id,
+        params: {
+          page: params.page
+        }
+      })
       scrollTo(0, 800)
     }
   }
@@ -84,7 +94,6 @@ export default {
     }
     .prev {
       float: left;
-      padding-left: 20px;
       &:hover {
         left: -4px;
       }

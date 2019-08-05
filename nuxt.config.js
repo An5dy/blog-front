@@ -12,7 +12,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: process.env.npm_package_description || '个人博客 技术交流'
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
@@ -32,11 +32,15 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['element-ui/lib/theme-chalk/index.css', '@/styles/index.scss'],
+  css: ['element-ui/lib/theme-chalk/index.css', '@/assets/index.scss'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/element-ui', '@/plugins/awesome', '@/plugins/axios'],
+  plugins: [
+    '@/plugins/element-ui',
+    { src: '@/plugins/awesome', ssr: false },
+    '@/plugins/axios'
+  ],
   /*
    ** Nuxt.js dev-modules
    */

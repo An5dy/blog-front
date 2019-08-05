@@ -5,10 +5,10 @@
       <ul v-for="(item, inde) in items" :key="inde">
         <div class="post-item">
           <div class="post-time">{{ item.created_at }}</div>
-          <router-link
+          <nuxt-link
             class="post-link"
-            :to="{ name: 'article-show', params: { id: item.id } }"
-            >{{ item.title }}</router-link
+            :to="{ name: 'articles-id', params: { id: item.id } }"
+            >{{ item.title }}</nuxt-link
           >
         </div>
       </ul>
@@ -23,7 +23,7 @@ export default {
       return this.$store.state.archive.archives
     }
   },
-  async fetch({ store }) {
+  async asyncData({ store }) {
     await store.dispatch('archive/fetchArchives')
   }
 }

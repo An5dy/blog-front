@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 nav,
 header,
 h1,
@@ -106,7 +111,7 @@ code {
 blockquote {
   color: #333;
   padding: 0.5em 0.8em;
-  border-left: .25em solid #dfe2e5;
+  border-left: 0.25em solid #dfe2e5;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   background:  #f8f8f8;
@@ -159,4 +164,11 @@ blockquote {
   nav.main-nav a {
     padding: 8px 8px !important;
   }
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
 }

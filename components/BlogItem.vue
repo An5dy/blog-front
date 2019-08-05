@@ -1,12 +1,12 @@
 <template>
   <li>
     <aside class="dates">{{ item.created_at }}</aside>
-    <router-link :to="{ name: 'article-show', params: { id: item.id } }">
+    <nuxt-link :to="{ name: 'articles-id', params: { id: item.id } }">
       {{ item.title }}
       <h2>
         <p>{{ item.sketch }}</p>
       </h2>
-    </router-link>
+    </nuxt-link>
   </li>
 </template>
 
