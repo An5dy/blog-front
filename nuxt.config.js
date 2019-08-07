@@ -37,8 +37,8 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '@/plugins/element-ui',
-    { src: '@/plugins/awesome', ssr: false },
+    { src: '@/plugins/element-ui', ssr: false },
+    { src: '@/plugins/awesome', ssr: true },
     '@/plugins/axios'
   ],
   /*
