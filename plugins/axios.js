@@ -1,18 +1,15 @@
 import Vue from 'vue'
-
+import Cookie from 'js-cookie'
 const vm = new Vue({})
 
-export default (app) => {
-  const axios = app.$axios
+export default ({ $axios }) => {
   // 通用设置
-  axios.defaults.timeout = 10000
-  axios.defaults.headers = {
-    Accept: 'application/json',
-    'X-Requested-With': 'XMLHttpRequest'
-  }
+  $axios.defaults.timeout = 10000
 
-  axios.onRequest((config) => {
+  $axios.onRequest((config) => {
     if (process.client) {
+      // 防止客户端获取不到 token 的问题
+      config.headers.Authorization = `Bearer ${Cookie.get('access_token')}`
       vm.$loading({
         lock: true,
         text: '努力加载中呀...',
@@ -21,15 +18,14 @@ export default (app) => {
     }
   })
 
-  axios.onResponse((response) => {
+  $axios.onResponse((response) => {
     if (process.client) {
       vm.$loading().close()
     }
     return response.data
   })
 
-  // axios.onError((error) => {
-  //   // parseInt(error.response && error.response.status)
-  //   // app.redirect('/500')
-  // })
+  $axios.onError(() => {
+    vm.$loading().close()
+  })
 }
