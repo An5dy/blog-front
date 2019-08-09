@@ -1,13 +1,11 @@
 <template>
-  <div>
-    1111
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  layout: 'admin'
+  asyncData({ redirect }) {
+    redirect('/admin/articles')
+  }
 }
 </script>
-
-<style lang="scss" scoped></style>

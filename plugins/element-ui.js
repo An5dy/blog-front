@@ -15,7 +15,12 @@ import {
   DropdownItem,
   Table,
   TableColumn,
+  Pagination,
+  Tag,
   Dialog,
+  Select,
+  Option,
+  Switch,
   Scrollbar,
   MessageBox
 } from 'element-ui'
@@ -35,7 +40,12 @@ export default () => {
   Vue.use(DropdownItem)
   Vue.use(Table)
   Vue.use(TableColumn)
+  Vue.use(Pagination)
+  Vue.use(Tag)
   Vue.use(Dialog)
+  Vue.use(Select)
+  Vue.use(Option)
+  Vue.use(Switch)
   Vue.use(Scrollbar)
   Vue.use(Loading.directive)
   Vue.prototype.$ELEMENT = { size: 'small' }

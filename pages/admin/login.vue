@@ -85,7 +85,7 @@ export default {
           this.$store
             .dispatch('auth/handleLogin', this.loginForm)
             .then(() => {
-              // this.$router.push('/')
+              this.$router.push('/admin')
             })
             .catch(() => {})
         } else {

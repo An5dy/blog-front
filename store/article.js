@@ -3,12 +3,7 @@ export const state = () => {
     list: [],
     meta: {},
     categories: [],
-    article: {
-      id: null,
-      category_id: null,
-      main: '',
-      title: ''
-    }
+    article: {}
   }
 }
 
@@ -25,20 +20,38 @@ export const mutations = {
   SET_ARTICLE: (state, action) => {
     state.article = action
   },
-  INIT_ARTICLE: (state) => {
-    state.article = {
-      id: null,
-      category_id: null,
-      main: '',
-      title: ''
+  UPPER_ARTICLE: (state, action) => {
+    for (const item of state.list) {
+      if (item.id === action) {
+        item.is_published = 1
+        return
+      }
     }
+  },
+  LOWER_ARTICLE: (state, action) => {
+    for (const item of state.list) {
+      if (item.id === action) {
+        item.is_published = 0
+        return
+      }
+    }
+  },
+  DELETE_ARTICLE: (state, action) => {
+    let tm
+    for (const [key, item] of state.list.entries()) {
+      if (item.id === action) {
+        tm = key
+        break
+      }
+    }
+    state.list.splice(tm, 1)
   }
 }
 
 export const actions = {
   async fetchArticles({ commit }, payload) {
-    const response = await this.$axios.get('/api/articles', {
-      params: payload
+    const response = await this.$axios.get(payload.path, {
+      params: payload.params
     })
     const { data, meta } = response
     commit('SET_LIST', data)
@@ -46,7 +59,7 @@ export const actions = {
     return response
   },
   async fetchArticle({ commit }, payload) {
-    const response = await this.$axios.get(`/api/articles/${payload}`)
+    const response = await this.$axios.get(payload)
     commit('SET_ARTICLE', response.data)
     return response
   },
@@ -59,6 +72,55 @@ export const actions = {
     const { data, meta } = response
     commit('SET_LIST', data)
     commit('SET_META', meta)
+    return response
+  },
+  async upperArticle({ commit }, payload) {
+    const response = await this.$axios.post(
+      `/api/admin/articles/${payload}/upper`,
+      {
+        _method: 'PATCH'
+      }
+    )
+    commit('UPPER_ARTICLE', payload)
+    return response
+  },
+  async lowerArticle({ commit }, payload) {
+    const response = await this.$axios.post(
+      `/api/admin/articles/${payload}/lower`,
+      {
+        _method: 'PATCH'
+      }
+    )
+    commit('LOWER_ARTICLE', payload)
+    return response
+  },
+  async deleteArticle({ commit }, payload) {
+    const response = await this.$axios.post(`/api/admin/articles/${payload}`, {
+      _method: 'DELETE'
+    })
+    commit('DELETE_ARTICLE', payload)
+    return response
+  },
+  async deleteTag({ commit }, payload) {
+    const response = await this.$axios.post(`/api/admin/tags/${payload}`, {
+      _method: 'DELETE'
+    })
+    return response
+  },
+  async handleStore({ commit }, payload) {
+    const response = await this.$axios.post(`/api/admin/articles`, payload)
+    return response
+  },
+  async handleUpdate({ commit }, payload) {
+    const response = await this.$axios.post(
+      `/api/admin/articles/${payload.id}`,
+      {
+        title: payload.title,
+        category_id: payload.category.id,
+        main: payload.main,
+        _method: 'PATCH'
+      }
+    )
     return response
   }
 }

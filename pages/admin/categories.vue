@@ -2,30 +2,25 @@
   <div class="category-container">
     <div class="menus-bar">
       <el-button
-        type="primary"
+        type="success"
         icon="el-icon-edit"
-        size="mini"
+        size="small"
         @click="handleCreate"
-      />
+      >
+        新增
+      </el-button>
     </div>
-    <el-table v-loading="loading" :data="list" stripe style="width: 100%">
-      <el-table-column prop="id" label="ID" width="100" />
+    <el-table :data="list" stripe style="width: 100%">
+      <el-table-column prop="id" align="center" label="序号" />
       <el-table-column prop="title" align="center" label="标题" width="180" />
       <el-table-column prop="updated_at" align="center" label="操作">
         <template slot-scope="scope">
-          <el-button
-            type="text"
-            size="medium"
-            icon="el-icon-edit-outline"
-            @click="handleEdit(scope.row)"
-          />
-          <el-button
-            type="text"
-            size="medium"
-            icon="el-icon-delete"
-            style="color: #f56c6c;"
-            @click="handleDelete(scope.row)"
-          />
+          <el-button type="primary" size="mini" @click="handleEdit(scope.row)">
+            编辑
+          </el-button>
+          <el-button type="danger" size="mini" @click="handleDelete(scope.row)">
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -70,7 +65,6 @@ export default {
   layout: 'admin',
   data() {
     return {
-      loading: false,
       dialogTitle: {
         create: '新增分类',
         edit: '修改分类'

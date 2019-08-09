@@ -51,7 +51,7 @@ export default {
     }
   },
   async fetch({ store, params }) {
-    await store.dispatch('article/fetchArticle', params.id)
+    await store.dispatch('article/fetchArticle', `/api/articles/${params.id}`)
   }
 }
 </script>

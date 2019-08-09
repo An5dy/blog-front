@@ -1,22 +1,10 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper" class="sidebar-container">
     <el-menu :default-active="$route.path" router>
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-document" />
-          <span>文章管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/admin/articles">
-            <i class="el-icon-document" />
-            <span>列表</span>
-          </el-menu-item>
-          <el-menu-item index="/admin/articles/create">
-            <i class="el-icon-edit" />
-            <span>新增</span>
-          </el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
+      <el-menu-item index="/admin/articles">
+        <i class="el-icon-menu" />
+        <span slot="title">文章管理</span>
+      </el-menu-item>
       <el-menu-item index="/admin/categories">
         <i class="el-icon-menu" />
         <span slot="title">分类管理</span>

@@ -31,25 +31,27 @@ export default {
     },
     meta() {
       return this.$store.state.article.meta
-    },
-    loading() {
-      return this.$store.state.article.loading
     }
   },
   async asyncData({ store }) {
-    await store.dispatch('article/fetchArticles')
+    await store.dispatch('article/fetchArticles', {
+      path: '/api/articles'
+    })
   },
   methods: {
     async handleNext() {
-      await this._getArticles(this.meta.current_page + 1)
+      await this._getArticles(1)
     },
     async handlePrev() {
-      await this._getArticles(this.meta.current_page - 1)
+      await this._getArticles(-1)
     },
     async _getArticles(page) {
-      const params = {}
-      params.page = page
-      await this.$store.dispatch('article/fetchArticles', params)
+      await this.$store.dispatch('article/fetchArticles', {
+        path: '/api/articles',
+        params: {
+          page: this.meta.current_page + page
+        }
+      })
       scrollTo(0, 800)
     }
   }
