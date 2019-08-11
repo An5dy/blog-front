@@ -5,13 +5,13 @@
         <icon name="github" scale="2" />
       </a>
       <p class="small">
-        © Copyright 2018 &nbsp;
+        ©&nbsp;Copyright&nbsp;2018&nbsp;
         <span class="heart"><icon name="heart" scale="0.9" />&nbsp;Andy</span>
       </p>
       <p class="small">
-        Powered by &nbsp;
-        <a href="https://lumen.laravel.com" target="_blank">Lumen &nbsp;</a>
-        Theme By &nbsp;
+        Powered&nbsp;by&nbsp;
+        <a href="https://lumen.laravel.com" target="_blank">Lumen&nbsp;</a>
+        &nbsp;Theme&nbsp;By&nbsp;
         <a href="https://github.com/fuzhouxxdong/hexo-theme-dxx" target="_blank"
           >Dxx</a
         >
