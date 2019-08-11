@@ -1,16 +1,13 @@
 <template>
   <div>
     <el-menu class="header">
-      <div class="logo">
-        <router-link to="/admin">管理后台</router-link>
-      </div>
       <el-dropdown
         class="userinfo-container"
         trigger="click"
         @command="handleCommand"
       >
         <div class="userinfo-name">
-          <span class="el-dropdown-link userinfo-inner">管理员</span>
+          <span class="el-dropdown-link userinfo-inner">设置</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="userinfo-dropdown">
@@ -74,9 +71,14 @@ export default {
           type: 'warning'
         })
           .then(() => {
-            this.$store.dispatch('login/logout').then(() => {
-              location.reload()
-            })
+            this.$store
+              .dispatch('auth/handleLogout')
+              .then(() => {
+                location.reload()
+              })
+              .catch(() => {
+                this.$store.dispatch('auth/resetToken')
+              })
           })
           .catch(() => {})
       }
@@ -84,15 +86,9 @@ export default {
         this.dialogFormVisible = true
       }
     },
-    onSubmit() {
-      // LoginAPI.password(this.user)
-      //   .then(() => {
-      //     this.dialogFormVisible = false
-      //     this.$message.success('密码修改成功')
-      //   })
-      //   .catch(() => {
-      //     this.$message.error('密码修改失败')
-      //   });
+    async onSubmit() {
+      await this.$store.dispatch('auth/updatePassword', this.user)
+      this.dialogFormVisible = false
     }
   }
 }
@@ -100,27 +96,11 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  border-radius: 0px !important;
+  height: 50px;
   z-index: 100;
-  position: fixed;
   min-width: 100%;
-  background-color: #409eff;
-  .logo {
-    float: left;
-    font-size: 24px;
-    font-weight: 700;
-    color: #ffffff;
-    width: 182px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    overflow: hidden;
-    a {
-      color: #ffffff;
-    }
-  }
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   .userinfo-container {
-    color: #ffffff;
     font-size: 15px;
     font-weight: 700;
     height: 50px;

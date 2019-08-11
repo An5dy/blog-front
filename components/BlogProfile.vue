@@ -3,7 +3,7 @@
     <section class="wrapper">
       <header class="header">
         <router-link :to="{ name: 'about' }">
-          <img class="avatar" src="@/assets/avatar.png" />
+          <img class="avatar" src="@/assets/avatar.jpg" />
         </router-link>
         <h1>Andy's</h1>
         <h2>A simple Developer</h2>

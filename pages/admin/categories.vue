@@ -10,9 +10,9 @@
         新增
       </el-button>
     </div>
-    <el-table :data="list" stripe style="width: 100%">
+    <el-table :data="list" fit stripe border>
       <el-table-column prop="id" align="center" label="序号" />
-      <el-table-column prop="title" align="center" label="标题" width="180" />
+      <el-table-column prop="title" align="center" label="标题" />
       <el-table-column prop="updated_at" align="center" label="操作">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleEdit(scope.row)">

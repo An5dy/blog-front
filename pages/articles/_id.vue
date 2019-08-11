@@ -1,31 +1,36 @@
 <template>
-  <section class="post">
-    <article>
-      <header>
-        <h1>{{ article.title }}</h1>
-        <h2 class="headline">
-          {{ article.created_at
-          }}<span class="tags"
-            ><router-link
-              :to="{
-                name: 'categories-id-articles',
-                params: { id: article.category.id }
-              }"
-              >{{ article.category.title }}</router-link
-            ></span
-          >
-        </h2>
-      </header>
-      <markdown-to-html :markdown="article.main" />
-    </article>
-  </section>
+  <div>
+    <section class="post">
+      <article>
+        <header>
+          <h1>{{ article.title }}</h1>
+          <h2 class="headline">
+            {{ article.created_at
+            }}<span class="tags"
+              ><router-link
+                :to="{
+                  name: 'categories-id-articles',
+                  params: { id: article.category.id }
+                }"
+                >{{ article.category.title }}</router-link
+              ></span
+            >
+          </h2>
+        </header>
+        <markdown-to-html :markdown="article.main" />
+      </article>
+    </section>
+    <blog-comment />
+  </div>
 </template>
 
 <script>
+import BlogComment from '@/components/BlogComment'
 import MarkdownToHtml from '@/components/MarkdownToHtml'
 
 export default {
   components: {
+    BlogComment,
     MarkdownToHtml
   },
   head() {

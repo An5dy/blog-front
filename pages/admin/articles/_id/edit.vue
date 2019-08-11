@@ -1,13 +1,14 @@
 <template>
-  <el-form>
+  <el-form label-width="50px" size="small">
     <el-form-item label="标题">
-      <el-input v-model="article.title" size="small" style="width: 450px" />
+      <el-input v-model="article.title" />
     </el-form-item>
     <el-form-item label="分类">
       <el-select
         v-model="article.category.id"
-        size="small"
+        style="width: 100%;"
         placeholder="请选择分类"
+        clearable
       >
         <el-option
           v-for="category in categories"
@@ -22,7 +23,7 @@
     </el-form-item>
     <el-form-item>
       <el-button
-        style="float:right;"
+        style="width: 100%; margin-top: 20px;"
         size="medium"
         type="primary"
         @click="handleEdit"

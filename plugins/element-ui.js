@@ -21,6 +21,7 @@ import {
   Select,
   Option,
   Switch,
+  Card,
   Scrollbar,
   MessageBox
 } from 'element-ui'
@@ -46,6 +47,7 @@ export default () => {
   Vue.use(Select)
   Vue.use(Option)
   Vue.use(Switch)
+  Vue.use(Card)
   Vue.use(Scrollbar)
   Vue.use(Loading.directive)
   Vue.prototype.$ELEMENT = { size: 'small' }

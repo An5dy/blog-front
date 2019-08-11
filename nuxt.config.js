@@ -40,6 +40,7 @@ export default {
     { src: '@/plugins/element-ui', ssr: true },
     { src: '@/plugins/awesome', ssr: true },
     { src: '@/plugins/mavon-editor', ssr: false },
+    { src: '@/plugins/disqus', ssr: true },
     '@/plugins/axios'
   ],
   /*
@@ -77,6 +78,7 @@ export default {
    ** Build configuration
    */
   build: {
+    analyze: false,
     transpile: [/^vue-awesome/, /^element-ui/],
     babel: {
       plugins: [

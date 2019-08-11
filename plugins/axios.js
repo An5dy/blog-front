@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Cookie from 'js-cookie'
 const vm = new Vue({})
 
-export default ({ $axios }) => {
+export default ({ store, $axios }) => {
   // 通用设置
   $axios.defaults.timeout = 10000
 
@@ -19,6 +19,11 @@ export default ({ $axios }) => {
   })
 
   $axios.onResponse((response) => {
+    const authorization = response.headers.authorization
+    if (authorization) {
+      const accessToken = authorization.replace(/Bearer /, '')
+      store.dispatch('auth/refreshToken', accessToken)
+    }
     if (process.client) {
       vm.$loading().close()
     }
@@ -26,6 +31,8 @@ export default ({ $axios }) => {
   })
 
   $axios.onError(() => {
-    vm.$loading().close()
+    if (process.client) {
+      vm.$loading().close()
+    }
   })
 }

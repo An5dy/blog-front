@@ -10,16 +10,16 @@
         新增
       </el-button>
     </div>
-    <el-table :data="list" stripe style="width: 100%">
-      <el-table-column prop="id" label="ID" align="center" />
-      <el-table-column prop="title" align="center" label="标题" width="200" />
+    <el-table :data="list" stripe border fit>
+      <el-table-column prop="id" label="序号" align="center" />
+      <el-table-column prop="title" align="center" label="标题" />
       <el-table-column
         prop="category.title"
         label="分类"
         align="center"
         width="100"
       />
-      <el-table-column label="标签" prop="tags" align="center" width="300">
+      <el-table-column label="标签" prop="tags" align="center">
         <template slot-scope="scope">
           <el-tag
             v-for="(tag, index) in scope.row.tags"
@@ -53,7 +53,7 @@
         width="200"
         label="发布时间"
       />
-      <el-table-column label="操作" align="center" width="300">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleEdit(scope.row)">
             编辑

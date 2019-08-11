@@ -5,7 +5,9 @@
       <admin-sider />
       <div class="main-container">
         <section class="app-main">
-          <nuxt />
+          <el-card>
+            <nuxt />
+          </el-card>
         </section>
       </div>
     </no-ssr>
@@ -13,6 +15,7 @@
 </template>
 
 <script>
+import Cookie from 'js-cookie'
 import AdminSider from '@/components/AdminSider'
 import AdminHeader from '@/components/AdminHeader'
 
@@ -21,7 +24,10 @@ export default {
     AdminSider,
     AdminHeader
   },
-  middleware: ['auth']
+  middleware: ['auth'],
+  mounted() {
+    Cookie.set('access_token', this.$store.state.auth.token)
+  }
 }
 </script>
 
@@ -30,16 +36,14 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
-  /* 主体 */
   .main-container {
     margin-left: 180px;
-    padding-top: 50px;
     height: calc(100vh - 50px);
     overflow-y: auto;
+    background-color: #f8f8f8;
     .app-main {
-      min-height: calc(100vh - 140px);
       box-sizing: boder-box;
-      padding: 50px 20px 20px 20px;
+      padding: 30px 20px 50px 20px;
       position: relative;
       overflow: hidden;
     }

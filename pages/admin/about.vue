@@ -4,7 +4,12 @@
       <markdown-edit :main.sync="about.main"></markdown-edit>
     </el-form-item>
     <el-form-item>
-      <el-button size="small" type="primary" @click="handleUpdateOrCreate">
+      <el-button
+        style="width: 100%; margin-top: 20px;"
+        size="medium"
+        type="primary"
+        @click="handleUpdateOrCreate"
+      >
         确认发布
       </el-button>
     </el-form-item>
