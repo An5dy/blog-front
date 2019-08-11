@@ -7,15 +7,15 @@
 <script>
 export default {
   name: 'BlogComment',
-  data() {
-    return {
-      shortname: process.env.DISAUS_SHORT_NAME
-    }
-  },
   props: {
     title: {
       type: String,
       default: null
+    }
+  },
+  data() {
+    return {
+      shortname: process.env.DISAUS_SHORT_NAME
     }
   }
 }

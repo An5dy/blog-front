@@ -20,13 +20,13 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#1abc9c' },
+  loading: { color: '#5694f1', height: '3px' },
   /*
    ** 首页加载 loading
    */
   loadingIndicator: {
     name: 'rectangle-bounce',
-    color: '#1abc9c',
+    color: '#5694f1',
     background: 'white'
   },
   /*

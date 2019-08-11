@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Cookie from 'js-cookie'
 const vm = new Vue({})
 
-export default ({ store, $axios }) => {
+export default ({ store, $axios, redirect }) => {
   // 通用设置
   $axios.defaults.timeout = 10000
 
@@ -30,9 +30,18 @@ export default ({ store, $axios }) => {
     return response.data
   })
 
-  $axios.onError(() => {
+  $axios.onError((error) => {
     if (process.client) {
       vm.$loading().close()
+    }
+    const code = parseInt(error.response && error.response.status)
+    switch (code) {
+      case 404:
+        redirect('/404')
+        break
+      case 500:
+        redirect('/500')
+        break
     }
   })
 }
