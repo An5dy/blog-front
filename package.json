@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/dotenv": "^1.3.0",
+    "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/proxy": "^1.3.3",
     "cookieparser": "^0.1.0",
     "element-ui": "^2.4.11",
     "highlight.js": "^9.15.9",
@@ -25,9 +26,8 @@
     "vue-disqus": "^3.0.5"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^1.0.1",
+    "@nuxtjs/eslint-config": "^1.1.2",
     "@nuxtjs/eslint-module": "^0.2.1",
-    "@nuxtjs/proxy": "^1.3.3",
     "babel-eslint": "^10.0.1",
     "babel-plugin-component": "^1.1.1",
     "eslint": "^5.15.1",
@@ -37,7 +37,7 @@
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
     "prettier": "^1.16.4",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^7.2.0",
     "scss-loader": "0.0.1"
   }
 }
