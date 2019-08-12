@@ -9,7 +9,7 @@ export default {
   name: "BlogComment",
   data() {
     return {
-      shortname: "andy5"
+      shortname: ""
     };
   },
   props: {
