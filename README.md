@@ -21,6 +21,7 @@ $ npm run generate
 
 ## 配置项
 设置 .nev 文件
+>将 .env.example 文件复制为 .env 文件
 ```
 # API 请求地址
 API_URL=
