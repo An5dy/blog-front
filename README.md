@@ -4,7 +4,7 @@
 
 ``` bash
 # 安装依赖
-$ npm run install
+$ npm install
 
 # 运行开发环境，默认启动 localhost:3000
 $ npm run dev
