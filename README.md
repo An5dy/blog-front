@@ -1,22 +1,29 @@
-# blog-ssr
+# blog 前端页面（SRR）
 
-> ssr 渲染 blogblog
-
-## Build Setup
+## 开发步骤
 
 ``` bash
-# install dependencies
+# 安装依赖
 $ npm run install
 
-# serve with hot reload at localhost:3000
+# 运行开发环境，默认启动 localhost:3000
 $ npm run dev
 
-# build for production and launch server
+# 编译生成环境
 $ npm run build
+
+# 启动生成环境
 $ npm run start
 
-# generate static project
+# 生成静态项目
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## 配置项
+设置 .nev 文件
+```
+# API 请求地址
+API_URL=
+# disqus 配置
+DISAUS_SHORT_NAME=
+```
