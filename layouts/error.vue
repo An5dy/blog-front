@@ -45,7 +45,7 @@ export default {
         color: #8a8a8a;
         font-size: 18px;
         &:hover {
-          color: #1abc9c;
+          color: #5694f1;
         }
       }
     }

@@ -13,6 +13,23 @@ export default {
   components: {
     MarkdownToHtml
   },
+  head() {
+    return {
+      title: "Andy's Home | 关于",
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: "Andy's Home,个人博客,技术交流,关于"
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "Andy's Home,个人博客,技术交流,关于"
+        }
+      ]
+    }
+  },
   computed: {
     about() {
       return this.$store.state.about.about

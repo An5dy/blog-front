@@ -18,6 +18,23 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: "Andy's Home | 归档",
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: "Andy's Home,个人博客,技术交流,归档,文章归档"
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "Andy's Home,个人博客,技术交流,归档,文章归档"
+        }
+      ]
+    }
+  },
   computed: {
     archives() {
       return this.$store.state.archive.archives

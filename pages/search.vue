@@ -22,6 +22,23 @@ export default {
       query: ''
     }
   },
+  head() {
+    return {
+      title: "Andy's Home | 搜索",
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: "Andy's Home,个人博客,技术交流,搜索"
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: "Andy's Home,个人博客,技术交流,搜索,全文搜索"
+        }
+      ]
+    }
+  },
   computed: {
     list() {
       return this.$store.state.search.data
