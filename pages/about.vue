@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section class="post">
     <article>
       <markdown-to-html :markdown="about.main" />
     </article>
@@ -40,11 +40,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.about {
-  max-width: 700px;
-  padding: 0 40px 20px 40px;
-  margin: auto;
-}
-</style>

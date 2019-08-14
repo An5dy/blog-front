@@ -7,6 +7,7 @@ export default ({ store, $axios, redirect }) => {
   $axios.defaults.timeout = 10000
 
   $axios.onRequest((config) => {
+    config.headers.Accept = process.env.API_HEADER
     if (process.client) {
       // 防止客户端获取不到 token 的问题
       config.headers.Authorization = `Bearer ${Cookie.get('access_token')}`

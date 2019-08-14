@@ -37,13 +37,15 @@ export default {
       }
       h1 {
         font-weight: 400;
-        letter-spacing: 0;
+        letter-spacing: 0px;
         font-size: 20px;
         color: #222;
       }
       h2 {
-        margin-top: 10px;
         font: italic 18px/1.3em Georgia, serif;
+        font-size: 20px;
+        color: #aaa;
+        margin-top: 10px;
       }
     }
   }

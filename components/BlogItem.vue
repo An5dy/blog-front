@@ -4,7 +4,7 @@
     <nuxt-link :to="{ name: 'articles-id', params: { id: item.id } }">
       {{ item.title }}
       <h2>
-        <p>{{ item.sketch }}</p>
+        {{ item.sketch }}
       </h2>
     </nuxt-link>
   </li>
@@ -28,6 +28,9 @@ li {
   margin-bottom: 20px;
   list-style-position: outside;
   margin-left: 1.5em;
+  &:last-child {
+    margin-bottom: 0;
+  }
   & + li {
     padding-top: 20px;
   }
@@ -47,8 +50,10 @@ li {
     font: italic 14px/1.3em Georgia, serif;
     color: #bbb;
   }
-  p {
-    font: 400 16px/1.9 'Helvetica Neue', helvetica, Arial, sans-serif;
+  h2 {
+    font: normal 16px/1.5em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #aaa;
+    margin-top: 2px;
   }
 }
 </style>

@@ -63,9 +63,6 @@ export default {
 
 <style lang="scss" scoped>
 .post {
-  max-width: 700px;
-  padding: 0 40px 20px 40px;
-  margin: auto;
   header {
     text-align: center;
   }

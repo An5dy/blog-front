@@ -7,7 +7,7 @@
 <script>
 import marked from 'marked'
 import highlight from 'highlight.js'
-import 'highlight.js/styles/github-gist.css'
+import 'highlight.js/scss/atom-one-light.scss'
 
 export default {
   name: 'MarkdownToHtml',
