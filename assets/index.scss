@@ -148,6 +148,7 @@ table {
   h3,
   h4,
   h5,
+  blockquote,
   p {
     margin-bottom: 20px;
   }
@@ -218,12 +219,15 @@ ul {
 
 li {
   list-style-position: outside;
-  margin-left: 1.5em;
 }
 
-ul > li {
-  list-style-type: disc;
+ol,
+ul {
+  li {
+    list-style-type: none;
+  }
 }
+
 
 /* Line Height */
 
@@ -247,21 +251,6 @@ strong {
 em,
 i {
   font-style: italic;
-}
-
-.title {
-  display: inline-block;
-  line-height: 100%;
-  font-weight: 500;
-  font-size: 19px;
-  margin: 0;
-  padding-bottom: 20px;
-}
-
-.description {
-  float: right;
-  font: italic 14px/1.4em Georgia, serif;
-  color: #aaa;
 }
 
 .home {
@@ -341,7 +330,6 @@ blockquote {
   border-left: 0.25em solid #dfe2e5;
   background: #f8f8f8;
   font-size: 90%;
-
   p {
     margin-bottom: 0px !important;
   }
