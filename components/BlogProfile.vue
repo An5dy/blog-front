@@ -2,9 +2,11 @@
   <div class="profile">
     <section class="wrapper">
       <header class="header">
-        <router-link :to="{ name: 'about' }">
-          <img class="avatar" src="@/assets/avatar.jpg" />
-        </router-link>
+        <blog-avatar class="avatar" width="80px" height="80px">
+          <router-link :to="{ name: 'about' }">
+            <h3>Me</h3>
+          </router-link>
+        </blog-avatar>
         <h1>Andy's</h1>
         <h2>A simple Developer</h2>
       </header>
@@ -13,8 +15,13 @@
 </template>
 
 <script>
+import BlogAvatar from './BlogAvatar'
+
 export default {
-  name: 'BlogProfile'
+  name: 'BlogProfile',
+  components: {
+    BlogAvatar
+  }
 }
 </script>
 
@@ -29,10 +36,6 @@ export default {
       text-align: center;
       position: relative;
       .avatar {
-        display: inline-block;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
         margin-bottom: 20px;
       }
       h1 {

@@ -20,7 +20,9 @@
         <markdown-to-html :markdown="article.main" />
       </article>
     </section>
-    <blog-comment />
+    <no-ssr>
+      <blog-comment />
+    </no-ssr>
   </div>
 </template>
 

@@ -2,17 +2,22 @@
   <li>
     <aside class="dates">{{ item.created_at }}</aside>
     <nuxt-link :to="{ name: 'articles-id', params: { id: item.id } }">
-      {{ item.title }}
-      <h2>
-        {{ item.sketch }}
-      </h2>
+      <text-hover :text="item.title" />
     </nuxt-link>
+    <h2>
+      {{ item.sketch }}
+    </h2>
   </li>
 </template>
 
 <script>
+import TextHover from './TextHover'
+
 export default {
   name: 'BlogItem',
+  components: {
+    TextHover
+  },
   props: {
     item: {
       type: Object,
@@ -38,10 +43,6 @@ li {
     color: #333;
     display: block;
     font: 500 22px/1.8 'Helvetica Neue', helvetica, Arial, sans-serif;
-    &:hover {
-      text-decoration: none;
-      color: #5694f1;
-    }
   }
   .dates {
     float: right;
