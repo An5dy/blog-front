@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <no-ssr>
+    <client-only>
       <admin-header />
       <admin-sider />
       <div class="main-container">
@@ -10,7 +10,7 @@
           </el-card>
         </section>
       </div>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 

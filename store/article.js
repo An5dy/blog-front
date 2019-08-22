@@ -2,7 +2,6 @@ export const state = () => {
   return {
     list: [],
     meta: {},
-    categories: [],
     article: {}
   }
 }
@@ -13,9 +12,6 @@ export const mutations = {
   },
   SET_META: (state, action) => {
     state.meta = action
-  },
-  SET_CATEGORIES: (state, action) => {
-    state.categories = action
   },
   SET_ARTICLE: (state, action) => {
     state.article = action

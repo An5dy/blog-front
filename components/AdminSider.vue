@@ -11,15 +11,19 @@
       >
         <el-menu-item index="/admin/articles">
           <i class="el-icon-document" />
-          <span slot="title">文章管理</span>
+          <span slot="title">文章</span>
         </el-menu-item>
         <el-menu-item index="/admin/categories">
           <i class="el-icon-menu" />
-          <span slot="title">分类管理</span>
+          <span slot="title">分类</span>
         </el-menu-item>
         <el-menu-item index="/admin/about">
-          <i class="el-icon-setting" />
+          <i class="el-icon-s-custom" />
           <span slot="title">关于</span>
+        </el-menu-item>
+        <el-menu-item index="/admin/setting">
+          <i class="el-icon-s-tools" />
+          <span slot="title">设置</span>
         </el-menu-item>
       </el-menu>
     </el-scrollbar>

@@ -9,5 +9,6 @@ export const actions = {
       accessToken = cookie.access_token
     }
     await dispatch('auth/initToken', accessToken)
+    await dispatch('setting/fetchSetting')
   }
 }

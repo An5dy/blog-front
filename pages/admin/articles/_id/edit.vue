@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { generateTree } from '@/utils/tools'
 import MarkdownEdit from '@/components/MarkdownEdit'
 
 export default {
@@ -43,7 +44,7 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.state.category.list
+      return generateTree(this.$store.state.category.list)
     },
     article() {
       return this.$store.state.article.article

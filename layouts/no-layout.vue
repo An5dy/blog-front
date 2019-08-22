@@ -1,7 +1,7 @@
 <template>
   <div>
-    <no-ssr>
+    <client-only>
       <nuxt />
-    </no-ssr>
+    </client-only>
   </div>
 </template>

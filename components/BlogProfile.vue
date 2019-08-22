@@ -2,13 +2,18 @@
   <div class="profile">
     <section class="wrapper">
       <header class="header">
-        <blog-avatar class="avatar" width="80px" height="80px">
+        <blog-avatar
+          class="avatar"
+          width="80px"
+          height="80px"
+          :image="setting.avatar"
+        >
           <router-link :to="{ name: 'about' }">
             <h3>Me</h3>
           </router-link>
         </blog-avatar>
-        <h1>Andy's</h1>
-        <h2>A simple Developer</h2>
+        <h1>{{ setting.title }}</h1>
+        <h2>{{ setting.sketch }}</h2>
       </header>
     </section>
   </div>
@@ -21,6 +26,11 @@ export default {
   name: 'BlogProfile',
   components: {
     BlogAvatar
+  },
+  computed: {
+    setting() {
+      return this.$store.state.setting.setting
+    }
   }
 }
 </script>
