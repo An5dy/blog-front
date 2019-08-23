@@ -2,7 +2,7 @@
   <el-form
     ref="loginForm"
     :model="loginForm"
-    :rules="loginRules"
+    :rules="rules"
     label-position="left"
     label-width="0px"
     class="login-container"
@@ -36,20 +36,8 @@
 </template>
 
 <script>
-const validateAccount = (rule, value, callback) => {
-  if (!value) {
-    callback(new Error('用户名不能为空。'))
-  } else {
-    callback()
-  }
-}
-const validatePassword = (rule, value, callback) => {
-  if (value.length < 6) {
-    callback(new Error('密码不能小于6位。'))
-  } else {
-    callback()
-  }
-}
+import { Message } from 'element-ui'
+
 export default {
   layout: 'no-layout',
   middleware: 'auth',
@@ -59,39 +47,44 @@ export default {
         account: '',
         password: ''
       },
-      loginRules: {
+      rules: {
         account: [
           {
             required: true,
-            trigger: 'blur',
-            validator: validateAccount
+            message: '账号 不能为空。',
+            trigger: 'blur'
           }
         ],
         password: [
           {
             required: true,
-            trigger: 'blur',
-            validator: validatePassword
+            message: '密码 不能为空。',
+            trigger: 'blur'
+          },
+          {
+            min: 6,
+            message: '密码 不能小于6位。',
+            trigger: 'blur'
           }
         ]
       }
     }
   },
   methods: {
-    handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          this.loading = true
-          this.$store
-            .dispatch('auth/handleLogin', this.loginForm)
-            .then(() => {
-              this.$router.push('/admin')
-            })
-            .catch(() => {})
-        } else {
-          return false
+    async handleLogin() {
+      const valid = await this.$refs.loginForm.validate()
+      if (valid) {
+        try {
+          await this.$store.dispatch('auth/handleLogin', this.loginForm)
+          this.$router.push('/admin')
+        } catch (error) {
+          Message({
+            message: error.response.data.message,
+            type: 'error',
+            center: true
+          })
         }
-      })
+      }
     }
   }
 }

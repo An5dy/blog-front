@@ -1,5 +1,12 @@
 <template>
-  <el-form label-width="100px" size="normal" style="max-width: 500px;">
+  <el-form
+    ref="setting"
+    :rules="rules"
+    :model="setting"
+    label-width="100px"
+    size="normal"
+    style="max-width: 500px;"
+  >
     <el-form-item label="头像">
       <el-upload
         class="avatar-uploader"
@@ -13,10 +20,10 @@
         <i v-else class="el-icon-plus avatar-uploader-icon" />
       </el-upload>
     </el-form-item>
-    <el-form-item label="标题">
+    <el-form-item label="标题" prop="title" :error="errors.title">
       <el-input v-model="setting.title" />
     </el-form-item>
-    <el-form-item label="简介">
+    <el-form-item label="简介" prop="sketch" :error="errors.sketch">
       <el-input v-model="setting.sketch" />
     </el-form-item>
     <el-form-item>
@@ -34,17 +41,55 @@
 <script>
 import Cookie from 'js-cookie'
 import { Upload } from 'element-ui'
+import ValidateError from '@/mixins/validate-error'
 
 export default {
   layout: 'admin',
   components: {
     ElUpload: Upload
   },
+  mixins: [ValidateError],
   data() {
     return {
       uploadHeaders: {
         Accept: process.env.API_HEADER,
         Authorization: `Bearer ${Cookie.get('access_token')}`
+      },
+      rules: {
+        title: [
+          {
+            required: true,
+            message: '标题 不能为空。',
+            trigger: 'blur'
+          },
+          {
+            max: 50,
+            message: '标题 不能大于 50 个字符串。',
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            message: '标题 必须是字符串。',
+            trigger: 'blur'
+          }
+        ],
+        sketch: [
+          {
+            required: true,
+            message: '简介 不能为空。',
+            trigger: 'blur'
+          },
+          {
+            max: 255,
+            message: '简介 不能大于 255 个字符串。',
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            message: '简介 必须是字符串。',
+            trigger: 'blur'
+          }
+        ]
       }
     }
   },
@@ -69,12 +114,18 @@ export default {
       } catch (error) {}
     },
     async handleUpdateOrCreate() {
-      try {
-        await this.$store.dispatch('setting/handleUpdate', {
-          title: this.setting.title,
-          sketch: this.setting.sketch
-        })
-      } catch (error) {}
+      const valid = await this.$refs.setting.validate()
+      if (valid) {
+        try {
+          await this.$store.dispatch('setting/handleUpdate', {
+            title: this.setting.title,
+            sketch: this.setting.sketch
+          })
+        } catch (error) {
+          const data = error.response.data
+          this._setErrors(data)
+        }
+      }
     }
   }
 }

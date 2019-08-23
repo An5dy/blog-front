@@ -37,10 +37,21 @@
       :visible.sync="dialogFormVisible"
       width="500px"
     >
-      <el-form :model="category" label-position="top" label-width="50px">
-        <el-form-item label="父级分类" size="small">
+      <el-form
+        ref="category"
+        size="small"
+        :model="category"
+        :rules="rules"
+        label-position="top"
+      >
+        <el-form-item
+          label="父级分类"
+          prop="category_id"
+          :error="errors.category_id"
+        >
           <el-select
             v-model="category.category_id"
+            clearable
             style="width: 100%;"
             placeholder="请选择父级分类"
             :disabled="dialogStatus !== 'create'"
@@ -53,24 +64,23 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="名称" size="small">
-          <el-input v-model="category.title" auto-complete="off" />
+        <el-form-item label="标题" prop="title" :error.sync="errors.title">
+          <el-input v-model="category.title" clearable auto-complete="off" />
         </el-form-item>
       </el-form>
       <div slot="footer">
-        <el-button size="small" @click="dialogFormVisible = false"
-          >取 消</el-button
-        >
+        <el-button @click="dialogFormVisible = false">
+          取 消
+        </el-button>
         <el-button
           v-if="dialogStatus === 'create'"
           type="primary"
-          size="mini"
           @click="handleStore"
           >确 定</el-button
         >
-        <el-button v-else type="primary" size="mini" @click="handleUpdate"
-          >确 定</el-button
-        >
+        <el-button v-else type="primary" @click="handleUpdate">
+          确 定
+        </el-button>
       </div>
     </el-dialog>
   </div>
@@ -78,9 +88,11 @@
 
 <script>
 import { generateTree } from '@/utils/tools'
+import ValidateError from '@/mixins/validate-error'
 
 export default {
   layout: 'admin',
+  mixins: [ValidateError],
   data() {
     return {
       dialogTitle: {
@@ -90,7 +102,33 @@ export default {
       dialogStatus: 'create',
       dialogFormVisible: false,
       category: { id: null, title: null, category_id: null },
-      defaultProps: { label: 'title' }
+      defaultProps: { label: 'title' },
+      rules: {
+        category_id: [
+          {
+            type: 'integer',
+            message: '分类 必须是整数。',
+            trigger: 'blur'
+          }
+        ],
+        title: [
+          {
+            required: true,
+            message: '标题 不能为空。',
+            trigger: 'blur'
+          },
+          {
+            max: 20,
+            message: '标题 不能大于 20 个字符串。',
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            message: '标题 必须是字符串。',
+            trigger: 'blur'
+          }
+        ]
+      }
     }
   },
   computed: {
@@ -109,15 +147,26 @@ export default {
       this.category = { id: null, title: null, category_id: null }
       this.dialogFormVisible = true
       this.dialogStatus = 'create'
-      this.$nextTick(() => {})
+      this.$nextTick(() => {
+        this.$refs.category.clearValidate()
+      })
     },
     async handleStore() {
-      await this.$store.dispatch('category/handleStore', {
-        title: this.category.title,
-        category_id: this.category.category_id
-      })
-      await this.$store.dispatch('category/fetchCategories')
-      this.dialogFormVisible = false
+      const valid = await this.$refs.category.validate()
+      if (valid) {
+        this._resetErros()
+        try {
+          await this.$store.dispatch('category/handleStore', {
+            title: this.category.title,
+            category_id: this.category.category_id
+          })
+          await this.$store.dispatch('category/fetchCategories')
+          this.dialogFormVisible = false
+        } catch (error) {
+          const data = error.response.data
+          this._setErrors(data)
+        }
+      }
     },
     handleEdit(row) {
       this.category = {
@@ -127,17 +176,29 @@ export default {
       }
       this.dialogStatus = 'edit'
       this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs.category.clearValidate()
+      })
     },
     async handleUpdate() {
-      await this.$store.dispatch('category/handleUpdate', {
-        id: this.category.id,
-        data: {
-          title: this.category.title,
-          category_id: this.category.category_id
+      const valid = await this.$refs.category.validate()
+      if (valid) {
+        this._resetErros()
+        try {
+          await this.$store.dispatch('category/handleUpdate', {
+            id: this.category.id,
+            data: {
+              title: this.category.title,
+              category_id: this.category.category_id
+            }
+          })
+          await this.$store.dispatch('category/fetchCategories')
+          this.dialogFormVisible = false
+        } catch (error) {
+          const data = error.response.data
+          this._setErrors(data)
         }
-      })
-      await this.$store.dispatch('category/fetchCategories')
-      this.dialogFormVisible = false
+      }
     },
     handleDelete(row) {
       this.$confirm('是否删除?', '提示', {
