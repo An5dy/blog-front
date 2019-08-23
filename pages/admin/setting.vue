@@ -7,7 +7,7 @@
     size="normal"
     style="max-width: 500px;"
   >
-    <el-form-item label="头像">
+    <el-form-item label="头像" :error="uploadError">
       <el-upload
         class="avatar-uploader"
         action="/api/admin/settings/avatar"
@@ -40,7 +40,7 @@
 
 <script>
 import Cookie from 'js-cookie'
-import { Upload } from 'element-ui'
+import { Upload, Message } from 'element-ui'
 import ValidateError from '@/mixins/validate-error'
 
 export default {
@@ -51,6 +51,7 @@ export default {
   mixins: [ValidateError],
   data() {
     return {
+      uploadError: null,
       uploadHeaders: {
         Accept: process.env.API_HEADER,
         Authorization: `Bearer ${Cookie.get('access_token')}`
@@ -104,14 +105,28 @@ export default {
   methods: {
     async handleAvatarSuccess(res, file) {
       const avatarUrl = res.data.path
-      const data = {
-        img_path: this.setting.avatar,
-        _method: 'DELETE'
-      }
+      const oldAvatar = this.setting.avatar
       try {
-        await this.$axios.post('/api/admin/images', data)
+        if (typeof oldAvatar !== 'undefined') {
+          await this.$axios.post('/api/admin/images', {
+            img_path: oldAvatar,
+            _method: 'DELETE'
+          })
+        }
         this.setting.avatar = avatarUrl
-      } catch (error) {}
+      } catch (err) {
+        const data = err.response.data
+        const errors = data.errors
+        if (typeof errors !== 'undefined') {
+          this.uploadError = errors.img_path[0]
+        } else {
+          Message({
+            message: data.message,
+            type: 'error',
+            center: true
+          })
+        }
+      }
     },
     async handleUpdateOrCreate() {
       const valid = await this.$refs.setting.validate()

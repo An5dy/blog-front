@@ -10,7 +10,9 @@ export const state = () => {
 
 export const mutations = {
   SET_SETTING: (state, action) => {
-    state.setting = action
+    state.setting.avatar = action.avatar
+    state.setting.title = action.title
+    state.setting.sketch = action.sketch
   }
 }
 
