@@ -160,6 +160,21 @@ table {
   }
 }
 
+/* 字体 */
+@font-face {
+  font-family: 'Fira Code';
+  src: url("~static/fonts/firacode/woff/FiraCode-Retina.woff2") format("woff2"),
+      url("~static/fonts/firacode/woff/FiraCode-Retina.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+html, body {
+  font-family: 'Fira Code';
+  height: 100%;
+  line-height: 1
+}
+
 /* Base */
 
 html,
@@ -168,7 +183,6 @@ body {
 }
 
 body {
-  font: 16px/1 "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   color: #666;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -182,7 +196,7 @@ h1 {
 }
 
 h2 {
-  font: italic 19px/1.3em Georgia, serif;
+  font: italic 19px/1.3em 'Fira Code';
   color: #bbb;
 }
 
@@ -262,7 +276,7 @@ i {
   }
 
   h2 {
-    font: italic 19px/1.3em Georgia, serif;
+    font: italic 19px/1.3em "Fira Code";
     color: #bbb;
   }
 }
@@ -274,7 +288,7 @@ i {
   h2 {
     margin-top: 20px;
     margin-bottom: 10px;
-    font: 300 24px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 300 24px/1.5 "Fira Code";
     color: #111;
   }  
 }
@@ -321,7 +335,6 @@ code {
   overflow-x: auto;
   padding: 0.5em 0.8em;
   background: #f8f8f8;
-  font: normal 10pt Consolas, Monaco, monospace;
   font-size: 80%;
 }
 

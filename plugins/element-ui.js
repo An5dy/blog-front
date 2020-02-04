@@ -23,7 +23,9 @@ import {
   Switch,
   Card,
   Scrollbar,
-  MessageBox
+  MessageBox,
+  Timeline,
+  TimelineItem
 } from 'element-ui'
 
 export default () => {
@@ -49,6 +51,8 @@ export default () => {
   Vue.use(Switch)
   Vue.use(Card)
   Vue.use(Scrollbar)
+  Vue.use(Timeline)
+  Vue.use(TimelineItem)
   Vue.use(Loading.directive)
   Vue.prototype.$ELEMENT = { size: 'small' }
   Vue.prototype.$loading = Loading.service

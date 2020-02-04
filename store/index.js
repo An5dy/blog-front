@@ -4,7 +4,7 @@ export const strict = false
 export const actions = {
   async nuxtServerInit({ dispatch }, { req }) {
     let accessToken = null
-    if (req.headers.cookie) {
+    if (req && req.headers.cookie) {
       const cookie = cookieparser.parse(req.headers.cookie)
       accessToken = cookie.access_token
     }

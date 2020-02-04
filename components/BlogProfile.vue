@@ -49,14 +49,14 @@ export default {
         margin-bottom: 20px;
       }
       h1 {
-        font-weight: 400;
+        font-weight: 500;
         letter-spacing: 0px;
-        font-size: 20px;
+        font-size: 23px;
         color: #222;
       }
       h2 {
-        font: italic 18px/1.3em Georgia, serif;
-        font-size: 20px;
+        font: italic Georgia, serif;
+        font-size: 17px;
         color: #aaa;
         margin-top: 10px;
       }

@@ -18,7 +18,7 @@
     </el-menu>
 
     <!-- 修改密码 -->
-    <el-dialog title="修改密码" :visible.sync="dialogFormVisible" width="400px">
+    <el-dialog :visible.sync="dialogFormVisible" title="修改密码" width="400px">
       <el-form :model="user">
         <el-form-item label="原密码" label-position="top">
           <el-input

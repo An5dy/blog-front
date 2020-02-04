@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 li {
   list-style-type: none;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   list-style-position: outside;
   margin-left: 1.5em;
   &:last-child {
@@ -42,7 +42,8 @@ li {
   a {
     color: #333;
     display: block;
-    font: 500 22px/1.8 'Helvetica Neue', helvetica, Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 500;
   }
   .dates {
     float: right;
@@ -52,7 +53,7 @@ li {
     color: #bbb;
   }
   h2 {
-    font: normal 16px/1.5em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: normal 16px/1.5em 'Fira Code';
     color: #aaa;
     margin-top: 2px;
   }

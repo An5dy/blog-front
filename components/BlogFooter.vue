@@ -5,13 +5,13 @@
         <icon name="github" scale="2" />
       </a>
       <p class="small">
-        ©&nbsp;Copyright&nbsp;2018&nbsp;
-        <span class="heart"><icon name="heart" scale="0.9" />&nbsp;Andy</span>
+        ©Copyright&nbsp;2018&nbsp;
+        <span class="heart"><icon name="heart" scale="0.9" />Andy</span>
       </p>
       <p class="small">
-        Powered&nbsp;by&nbsp;
+        Powered&nbsp;by
         <a href="https://lumen.laravel.com" target="_blank">Lumen&nbsp;</a>
-        &nbsp;Theme&nbsp;By&nbsp;
+        Theme&nbsp;By&nbsp;
         <a href="https://github.com/fuzhouxxdong/hexo-theme-dxx" target="_blank"
           >Dxx</a
         >
@@ -43,10 +43,9 @@ export default {
     .small {
       color: #bbb;
       font-size: 14px;
-      line-height: 1.5;
       display: block;
       text-align: center;
-      margin-top: 20px;
+      margin: 20px 0;
       a {
         color: #bbb;
       }
