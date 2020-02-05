@@ -19,12 +19,14 @@
         >
           <h4>
             <nuxt-link
-              class="post-link"
               :to="{ name: 'articles-id', params: { id: item.id } }"
+              class="post-link"
               >{{ item.title }}</nuxt-link
             >
           </h4>
-          <p>{{ item.created_at }}</p>
+          <p>
+            <format-time :time="item.created_at"></format-time>
+          </p>
         </el-card>
       </el-timeline-item>
     </el-timeline>
@@ -32,7 +34,12 @@
 </template>
 
 <script>
+import FormatTime from '@/components/FormatTime'
+
 export default {
+  components: {
+    FormatTime
+  },
   head() {
     return {
       title: "Andy's Home | 归档",
@@ -84,8 +91,10 @@ export default {
       color: #8a8a8a;
     }
     .post-link {
-      color: #8a8a8a;
+      color: #333;
+      overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }

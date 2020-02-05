@@ -6,10 +6,10 @@
     label-width="50px"
     size="normal"
   >
-    <el-form-item label="标题" prop="title" :error="errors.title">
+    <el-form-item :error="errors.title" label="标题" prop="title">
       <el-input v-model="article.title" />
     </el-form-item>
-    <el-form-item label="分类" prop="category.id" :error="errors.category_id">
+    <el-form-item :error="errors.category_id" label="分类" prop="category.id">
       <el-select
         v-model="article.category.id"
         style="width: 100%;"
@@ -24,15 +24,15 @@
         />
       </el-select>
     </el-form-item>
-    <el-form-item label="正文" prop="main" :error="errors.main">
+    <el-form-item :error="errors.main" label="正文" prop="main">
       <markdown-edit ref="md" :main.sync="article.main"></markdown-edit>
     </el-form-item>
     <el-form-item>
       <el-button
+        @click="handleEdit"
         style="width: 100%; margin-top: 20px;"
         size="medium"
         type="primary"
-        @click="handleEdit"
         >确认发布
       </el-button>
     </el-form-item>

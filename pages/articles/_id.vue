@@ -5,7 +5,7 @@
         <header>
           <h1>{{ article.title }}</h1>
           <h2 class="headline">
-            {{ article.created_at }}
+            <format-time :time="article.created_at"></format-time>
           </h2>
           <ul class="category">
             <li v-for="category in article.categories" :key="category.id">
@@ -15,7 +15,7 @@
                   params: { id: category.id }
                 }"
                 >{{ category.title }}</nuxt-link
-              >&nbsp;/&nbsp;
+              >/
             </li>
             <nuxt-link
               :to="{
@@ -36,13 +36,15 @@
 </template>
 
 <script>
+import FormatTime from '@/components/FormatTime'
 import BlogComment from '@/components/BlogComment'
 import MarkdownToHtml from '@/components/MarkdownToHtml'
 
 export default {
   components: {
     BlogComment,
-    MarkdownToHtml
+    MarkdownToHtml,
+    FormatTime
   },
   head() {
     return {
@@ -81,18 +83,17 @@ export default {
     margin-top: 40px;
     margin-bottom: 20px;
     color: #222;
-    font: 300 32px/1.4em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: 300 35px/1.4em 'Fira Code';
   }
   .headline {
-    font: normal 13px/1.5em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: normal 13px/1.5em 'Fira Code';
     margin: -5px 0 0 0;
     color: #b2b9be;
-    font-size: 13px;
     letter-spacing: 1px;
     display: inline-block;
   }
   .category {
-    font: normal 12px/1.5em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: normal 12px/1.5em 'Fira Code';
     display: table;
     margin: 0 auto;
     color: #b2b9be;

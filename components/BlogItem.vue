@@ -1,6 +1,10 @@
 <template>
   <li>
-    <aside class="dates">{{ item.created_at }}</aside>
+    <aside class="dates">
+      <div>
+        <format-time :time="item.created_at" :fromNow="true"></format-time>
+      </div>
+    </aside>
     <nuxt-link :to="{ name: 'articles-id', params: { id: item.id } }">
       <text-hover :text="item.title" />
     </nuxt-link>
@@ -12,11 +16,13 @@
 
 <script>
 import TextHover from './TextHover'
+import FormatTime from './FormatTime'
 
 export default {
   name: 'BlogItem',
   components: {
-    TextHover
+    TextHover,
+    FormatTime
   },
   props: {
     item: {
