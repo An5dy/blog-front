@@ -3,10 +3,10 @@
     <section class="wrapper">
       <header class="header">
         <blog-avatar
+          :image="setting.avatar"
           class="avatar"
           width="80px"
           height="80px"
-          :image="setting.avatar"
         >
           <router-link :to="{ name: 'about' }">
             <h3>Me</h3>

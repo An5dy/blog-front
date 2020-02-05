@@ -7,31 +7,31 @@
     size="normal"
     style="max-width: 500px;"
   >
-    <el-form-item label="头像" :error="uploadError">
+    <el-form-item :error="uploadError" label="头像">
       <el-upload
-        class="avatar-uploader"
-        action="/api/admin/settings/avatar"
-        name="image"
         :headers="uploadHeaders"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
+        class="avatar-uploader"
+        action="/api/admin/settings/avatar"
+        name="image"
       >
         <img v-if="setting.avatar" :src="setting.avatar" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon" />
       </el-upload>
     </el-form-item>
-    <el-form-item label="标题" prop="title" :error="errors.title">
+    <el-form-item :error="errors.title" label="标题" prop="title">
       <el-input v-model="setting.title" />
     </el-form-item>
-    <el-form-item label="简介" prop="sketch" :error="errors.sketch">
+    <el-form-item :error="errors.sketch" label="简介" prop="sketch">
       <el-input v-model="setting.sketch" />
     </el-form-item>
     <el-form-item>
       <el-button
+        @click="handleUpdateOrCreate"
         style="width: 100%; margin-top: 20px;"
         size="medium"
         type="primary"
-        @click="handleUpdateOrCreate"
         >确认设置
       </el-button>
     </el-form-item>

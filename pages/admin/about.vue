@@ -5,10 +5,10 @@
     </el-form-item>
     <el-form-item>
       <el-button
+        @click="handleUpdateOrCreate"
         style="width: 100%; margin-top: 20px;"
         size="medium"
         type="primary"
-        @click="handleUpdateOrCreate"
       >
         确认发布
       </el-button>

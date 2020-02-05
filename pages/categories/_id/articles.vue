@@ -6,15 +6,15 @@
     <nav class="post-nav">
       <span
         v-show="meta.current_page > 1"
+        @click="handlePrev"
         class="prev"
         style="padding-left: 20px;"
-        @click="handlePrev"
         ><i class="el-icon-arrow-left" />prev</span
       >
       <span
         v-show="meta.last_page > meta.current_page"
-        class="next"
         @click="handleNext"
+        class="next"
         >next<i class="el-icon-arrow-right"
       /></span>
     </nav>

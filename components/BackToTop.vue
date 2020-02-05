@@ -3,8 +3,8 @@
     <div
       v-show="visible"
       :style="customStyle"
-      class="back-to-ceiling"
       @click="backToTop"
+      class="back-to-ceiling"
     >
       <svg
         width="16"

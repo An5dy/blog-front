@@ -2,11 +2,11 @@
   <section class="search">
     <el-autocomplete
       v-model="search"
+      :fetch-suggestions="handleSearch"
+      @select="handleSelect"
       class="search-input"
       size="medium"
-      :fetch-suggestions="handleSearch"
       placeholder="请输入要搜索的内容..."
-      @select="handleSelect"
     >
       <el-button slot="append" icon="el-icon-search" />
     </el-autocomplete>

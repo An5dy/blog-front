@@ -70,24 +70,18 @@ export const actions = {
     commit('SET_META', meta)
     return response
   },
-  async upperArticle({ commit }, payload) {
+  async togglePublish({ commit }, payload) {
     const response = await this.$axios.post(
-      `/api/admin/articles/${payload}/upper`,
+      `/api/admin/articles/${payload.id}/publish`,
       {
         _method: 'PATCH'
       }
     )
-    commit('UPPER_ARTICLE', payload)
-    return response
-  },
-  async lowerArticle({ commit }, payload) {
-    const response = await this.$axios.post(
-      `/api/admin/articles/${payload}/lower`,
-      {
-        _method: 'PATCH'
-      }
-    )
-    commit('LOWER_ARTICLE', payload)
+    if (payload.is_published === 0) {
+      commit('UPPER_ARTICLE', payload)
+    } else {
+      commit('LOWER_ARTICLE', payload)
+    }
     return response
   },
   async deleteArticle({ commit }, payload) {

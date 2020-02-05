@@ -2,10 +2,10 @@
   <div class="artcile-container">
     <div class="menus-bar">
       <el-button
+        @click="handleCreate"
         type="success"
         icon="el-icon-edit"
         size="small"
-        @click="handleCreate"
       >
         新增
       </el-button>
@@ -24,11 +24,11 @@
           <el-tag
             v-for="(tag, index) in scope.row.tags"
             :key="index"
+            @close="handleTagClose(tag, scope.row.tags)"
             closable
             size="mini"
             style="margin-right: 5px"
             type="primary"
-            @close="handleTagClose(tag, scope.row.tags)"
             >{{ tag.title }}</el-tag
           >
         </template>
@@ -40,10 +40,10 @@
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.is_published"
-            active-color="#13ce66"
             :active-value="1"
             :inactive-value="0"
             @change="handlePublish(scope.row)"
+            active-color="#13ce66"
           />
         </template>
       </el-table-column>
@@ -55,10 +55,10 @@
       />
       <el-table-column label="操作" align="center" width="150" fixed="right">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleEdit(scope.row)">
+          <el-button @click="handleEdit(scope.row)" type="primary" size="mini">
             编辑
           </el-button>
-          <el-button type="danger" size="mini" @click="handleDelete(scope.row)">
+          <el-button @click="handleDelete(scope.row)" type="danger" size="mini">
             删除
           </el-button>
         </template>
@@ -66,12 +66,12 @@
     </el-table>
     <div class="pagination">
       <el-pagination
-        background
-        layout="prev, pager, next"
         :current-page.sync="meta.current_page"
         :page-size="meta.per_page"
         :total="meta.total"
         @current-change="handleCurrentChange"
+        background
+        layout="prev, pager, next"
       />
     </div>
   </div>
@@ -143,11 +143,7 @@ export default {
     },
     async handlePublish(row) {
       try {
-        if (row.is_published === 0) {
-          await this.$store.dispatch('article/lowerArticle', row.id)
-        } else {
-          await this.$store.dispatch('article/upperArticle', row.id)
-        }
+        await this.$store.dispatch('article/togglePublish', row)
       } catch (error) {}
     }
   }

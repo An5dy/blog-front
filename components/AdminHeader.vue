@@ -2,9 +2,9 @@
   <div>
     <el-menu class="header">
       <el-dropdown
+        @command="handleCommand"
         class="userinfo-container"
         trigger="click"
-        @command="handleCommand"
       >
         <div class="userinfo-name">
           <span class="el-dropdown-link userinfo-inner">设置</span>
@@ -38,10 +38,10 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button size="small" @click="dialogFormVisible = false"
+        <el-button @click="dialogFormVisible = false" size="small"
           >取 消</el-button
         >
-        <el-button type="primary" size="small" @click="onSubmit"
+        <el-button @click="onSubmit" type="primary" size="small"
           >确 定</el-button
         >
       </div>

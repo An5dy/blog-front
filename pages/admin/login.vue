@@ -26,9 +26,9 @@
     </el-form-item>
     <el-form-item style="width:100%;">
       <el-button
+        @click.native.prevent="handleLogin"
         type="primary"
         style="width:100%;"
-        @click.native.prevent="handleLogin"
         >登录
       </el-button>
     </el-form-item>

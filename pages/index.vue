@@ -4,13 +4,13 @@
       <blog-item v-for="(item, index) in list" :key="index" :item="item" />
     </ul>
     <nav class="post-nav">
-      <span v-show="meta.current_page > 1" class="prev" @click="handlePrev"
+      <span v-show="meta.current_page > 1" @click="handlePrev" class="prev"
         ><i class="el-icon-arrow-left" />prev</span
       >
       <span
         v-show="meta.last_page > meta.current_page"
-        class="next"
         @click="handleNext"
+        class="next"
         >next<i class="el-icon-arrow-right"
       /></span>
     </nav>

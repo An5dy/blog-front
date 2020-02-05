@@ -2,29 +2,29 @@
   <div class="category-container">
     <div class="menus-bar">
       <el-button
+        @click="handleCreate"
         type="success"
         icon="el-icon-edit"
         size="small"
-        @click="handleCreate"
       >
         新增
       </el-button>
     </div>
     <el-table
       :data="list"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
       row-key="id"
       stripe
       default-expand-all
-      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
       <el-table-column prop="id" align="left" label="序号" width="150" />
       <el-table-column prop="title" align="center" label="标题" />
       <el-table-column align="center" label="操作" width="150">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleEdit(scope.row)">
+          <el-button @click="handleEdit(scope.row)" type="primary" size="mini">
             编辑
           </el-button>
-          <el-button type="danger" size="mini" @click="handleDelete(scope.row)">
+          <el-button @click="handleDelete(scope.row)" type="danger" size="mini">
             删除
           </el-button>
         </template>
@@ -39,22 +39,22 @@
     >
       <el-form
         ref="category"
-        size="small"
         :model="category"
         :rules="rules"
+        size="small"
         label-position="top"
       >
         <el-form-item
+          :error="errors.category_id"
           label="父级分类"
           prop="category_id"
-          :error="errors.category_id"
         >
           <el-select
             v-model="category.category_id"
+            :disabled="dialogStatus !== 'create'"
             clearable
             style="width: 100%;"
             placeholder="请选择父级分类"
-            :disabled="dialogStatus !== 'create'"
           >
             <el-option
               v-for="item in items"
@@ -64,7 +64,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="标题" prop="title" :error.sync="errors.title">
+        <el-form-item :error.sync="errors.title" label="标题" prop="title">
           <el-input v-model="category.title" clearable auto-complete="off" />
         </el-form-item>
       </el-form>
@@ -74,11 +74,11 @@
         </el-button>
         <el-button
           v-if="dialogStatus === 'create'"
-          type="primary"
           @click="handleStore"
+          type="primary"
           >确 定</el-button
         >
-        <el-button v-else type="primary" @click="handleUpdate">
+        <el-button v-else @click="handleUpdate" type="primary">
           确 定
         </el-button>
       </div>
