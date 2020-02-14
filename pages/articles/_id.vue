@@ -76,6 +76,8 @@ export default {
 
 <style lang="scss" scoped>
 .post {
+  background-color: #ffffff;
+  border-radius: 4px;
   header {
     text-align: center;
   }

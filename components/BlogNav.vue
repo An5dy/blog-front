@@ -15,7 +15,6 @@ export default {
 <style lang="scss" scoped>
 .main-nav {
   padding: 20px 20px 0;
-  background: rgba(255, 255, 255, 0.9);
   margin: 0 auto;
   text-align: right;
   z-index: 100;

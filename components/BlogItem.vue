@@ -38,7 +38,7 @@ li {
   list-style-type: none;
   margin-bottom: 30px;
   list-style-position: outside;
-  margin-left: 1.5em;
+  padding: 1.2em;
   &:last-child {
     margin-bottom: 0;
   }

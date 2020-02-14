@@ -77,11 +77,12 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
-  padding: 0 40px 20px 40px;
+  padding: 0px 40px 20px 40px;
   .post-list {
-    margin-top: 0;
+    background-color: #ffffff;
+    border-radius: 4px;
   }
   .post-nav {
     text-align: center;

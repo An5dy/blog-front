@@ -14,7 +14,8 @@ export default ({ store, $axios, redirect }) => {
       vm.$loading({
         lock: true,
         text: '努力加载中呀...',
-        background: 'hsla(0,0%,100%,.9)'
+        background: 'hsla(0,0%,100%,.9)',
+        body: true
       })
     }
   })
